@@ -3,7 +3,7 @@ import db from '../config/Database.js';
 
 const {DataTypes} = Sequelize;
 
-const StatusPerkawinan = db.define('statusPerkawinan', {
+const StatusPerkawinan = db.define('status_perkawinan', {
     uuid:{
         type: DataTypes.STRING,
         defaultValue: DataTypes.UUIDV4,

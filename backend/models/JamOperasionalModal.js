@@ -3,7 +3,7 @@ import db from '../config/Database.js';
 
 const {DataTypes} = Sequelize;
 
-const JamOperasional = db.define('jamOperasional', {
+const JamOperasional = db.define('jam_operasional', {
     uuid:{
         type: DataTypes.STRING,
         defaultValue: DataTypes.UUIDV4,

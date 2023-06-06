@@ -95,7 +95,7 @@ const Users = db.define('users', {
         type: DataTypes.STRING,
         allowNull:true
     },
-    statusPerkawinan:{
+    statusPerkawinanId:{
         type: DataTypes.INTEGER,
         allowNull:true
     },
