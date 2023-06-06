@@ -3,7 +3,7 @@ import db from '../config/Database.js';
 
 const {DataTypes} = Sequelize;
 
-const Status = db.define('status', {
+const Atasan = db.define('atasan', {
     uuid:{
         type: DataTypes.STRING,
         defaultValue: DataTypes.UUIDV4,
@@ -12,7 +12,7 @@ const Status = db.define('status', {
             notEmpty: true
         }
     },
-    name:{
+    userId:{
         type: DataTypes.STRING,
         allowNull:false,
         validate:{
@@ -21,4 +21,4 @@ const Status = db.define('status', {
     }
 });
 
-export default Status;
+export default Atasan;

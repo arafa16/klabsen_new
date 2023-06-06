@@ -3,7 +3,7 @@ import db from '../config/Database.js';
 
 const {DataTypes} = Sequelize;
 
-const Status = db.define('status', {
+const Gander = db.define('gander', {
     uuid:{
         type: DataTypes.STRING,
         defaultValue: DataTypes.UUIDV4,
@@ -21,4 +21,4 @@ const Status = db.define('status', {
     }
 });
 
-export default Status;
+export default Gander;
