@@ -6,12 +6,12 @@ import Jabatan from './JabatanModal.js';
 import Atasan from './AtasanModal.js';
 import Bank from './BankModal.js';
 import JamOperasional from './JamOperasionalModal.js';
-import StatusPerkawinan from './StatusPerkawinan.js';
-import Pendidikan from './Pendidikan.js';
-import KontakEmergency from './KontakEmergency.js';
+import StatusPerkawinan from './StatusPerkawinanModal.js';
+import Pendidikan from './PendidikanModal.js';
+import KontakEmergency from './KontakEmergencyModal.js';
 import GolonganDarah from './GolonganDarahModel.js';
-import Group from './Group.js';
-import Gander from './Gander.js';
+import Group from './GroupModal.js';
+import Gander from './GanderModal.js';
 
 const {DataTypes} = Sequelize;
 
