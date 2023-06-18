@@ -14,6 +14,7 @@ import PendapatanRoute from './routes/PendapatanRoute.js';
 import GanderRoute from './routes/GanderRoute.js';
 import PenempatanRoute from './routes/PenempatanRoute.js';
 import AtasanRoute from './routes/AtasanRoute.js';
+import StatusPerkawinanRoute from './routes/StatusPerkawinanRoute.js';
 
 
 import db from './config/Database.js';
@@ -51,6 +52,7 @@ app.use(PendapatanRoute);
 app.use(GanderRoute);
 app.use(PenempatanRoute);
 app.use(AtasanRoute);
+app.use(StatusPerkawinanRoute);
 
 app.listen(process.env.APP_PORT, ()=>{
     console.log(`server running at pport ${process.env.APP_PORT}`)

@@ -15,7 +15,6 @@ export const getUserById = (req, res) => {
 }
 
 export const createUser = (req, res) => {
-
 }
 
 export const updateUser = (req, res) => {
