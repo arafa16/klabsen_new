@@ -33,7 +33,7 @@ const JamOperasional = db.define('jam_operasional', {
             notEmpty: true
         }
     },
-    ketarangan:{
+    keterangan:{
         type: DataTypes.STRING,
         allowNull:true
     }

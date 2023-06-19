@@ -19,6 +19,8 @@ import PendidikanRoute from './routes/PendidikanRoute.js';
 import KontakEmergancyRoute from './routes/KontakEmergencyRoute.js';
 import GolonganDarahRoute from './routes/GolonganDarahRoute.js';
 import BankRoute from './routes/BankRoute.js';
+import JamOperasionalRoute from './routes/JamOperasionalRoute.js';
+import GroupRoute from './routes/GroupRoute.js';
 
 
 import db from './config/Database.js';
@@ -61,6 +63,8 @@ app.use(PendidikanRoute);
 app.use(KontakEmergancyRoute);
 app.use(GolonganDarahRoute);
 app.use(BankRoute);
+app.use(JamOperasionalRoute);
+app.use(GroupRoute);
 
 app.listen(process.env.APP_PORT, ()=>{
     console.log(`server running at pport ${process.env.APP_PORT}`)
