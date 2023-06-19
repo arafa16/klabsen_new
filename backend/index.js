@@ -15,6 +15,10 @@ import GanderRoute from './routes/GanderRoute.js';
 import PenempatanRoute from './routes/PenempatanRoute.js';
 import AtasanRoute from './routes/AtasanRoute.js';
 import StatusPerkawinanRoute from './routes/StatusPerkawinanRoute.js';
+import PendidikanRoute from './routes/PendidikanRoute.js';
+import KontakEmergancyRoute from './routes/KontakEmergencyRoute.js';
+import GolonganDarahRoute from './routes/GolonganDarahRoute.js';
+import BankRoute from './routes/BankRoute.js';
 
 
 import db from './config/Database.js';
@@ -53,6 +57,10 @@ app.use(GanderRoute);
 app.use(PenempatanRoute);
 app.use(AtasanRoute);
 app.use(StatusPerkawinanRoute);
+app.use(PendidikanRoute);
+app.use(KontakEmergancyRoute);
+app.use(GolonganDarahRoute);
+app.use(BankRoute);
 
 app.listen(process.env.APP_PORT, ()=>{
     console.log(`server running at pport ${process.env.APP_PORT}`)
