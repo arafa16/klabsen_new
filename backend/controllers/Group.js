@@ -8,7 +8,7 @@ export const getGroups = async(req, res) => {
 
         res.status(200).json(response);
     } catch (error) {
-        res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -23,7 +23,7 @@ export const getGroupById = async(req, res) => {
 
         res.status(200).json(response);
     } catch (error) {
-        res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -36,7 +36,7 @@ export const createGroup = async(req, res) => {
 
         return res.status(201).json({msg: "success"});
     } catch (error) {
-        return res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -58,7 +58,7 @@ export const updateGroup = async(req, res) => {
 
         return res.status(201).json({msg: "success"});
     } catch (error) {
-        return res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -76,7 +76,7 @@ export const deleteGroup = async(req, res) => {
 
         return res.status(201).json({msg: "success"});
     } catch (error) {
-        return res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 }
 

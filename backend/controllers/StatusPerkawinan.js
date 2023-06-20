@@ -6,9 +6,9 @@ export const getStatuses = async(req, res) => {
             attributes:['uuid','name']
         });
 
-        res.status(200).json(response);
+        return res.status(200).json(response);
     } catch (error) {
-        res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -36,7 +36,7 @@ export const createStatus = async(req, res) => {
 
         res.status(201).json({mag: "create status success"});
     } catch (error) {
-        res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -55,7 +55,7 @@ export const updateStatus = async(req, res) => {
 
         res.status(201).json({mag: "update status success"});
     } catch (error) {
-        res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -72,6 +72,6 @@ export const deleteStatus = async(req, res) => {
 
         res.status(201).json({mag: "delete status success"});
     } catch (error) {
-        res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 }

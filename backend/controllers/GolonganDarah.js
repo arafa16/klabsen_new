@@ -8,7 +8,7 @@ export const getGolonganDarahs = async(req, res) => {
 
         res.status(200).json(response);
     } catch (error) {
-        res.status(500).json({msg: error.msg})
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -23,7 +23,7 @@ export const getGolonganDarahById = async(req, res) => {
 
         res.status(200).json(response);
     } catch (error) {
-        res.status(500).json({msg: error.msg})
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -35,7 +35,7 @@ export const createGolonganDarah = async(req, res) => {
 
         res.status(201).json({msg: "create golongan darah success"});
     } catch (error) {
-        res.status(500).json({msg: error.msg})
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -55,7 +55,7 @@ export const updateGolonganDarah = async(req, res) => {
 
         res.status(200).json(response);
     } catch (error) {
-        res.status(500).json({msg: error.msg})
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -73,6 +73,6 @@ export const deleteGolonganDarah = async(req, res) => {
 
         res.status(200).json(response);
     } catch (error) {
-        res.status(500).json({msg: error.msg})
+        return res.status(500).json({msg: error.message});
     }
 }

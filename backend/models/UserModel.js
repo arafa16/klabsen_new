@@ -24,6 +24,13 @@ const Users = db.define('users', {
             notEmpty: true
         }
     },
+    absenId:{
+        type: DataTypes.STRING,
+        allowNull:false,
+        validate:{
+            notEmpty: true
+        }
+    },
     nik:{
         type: DataTypes.STRING,
         allowNull:true

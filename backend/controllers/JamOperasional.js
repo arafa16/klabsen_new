@@ -8,7 +8,7 @@ export const getJamOperasionals = async(req, res) => {
 
         return res.status(200).json(response);
     } catch (error) {
-        return res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -23,7 +23,7 @@ export const getJamOperasionalById = async(req, res) => {
 
         return res.status(200).json(response);
     } catch (error) {
-        return res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -39,7 +39,7 @@ export const createJamOperasional = async(req, res) => {
 
         res.status(201).json({msg: "create jam operasional success"});
     } catch (error) {
-        res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -64,7 +64,7 @@ export const updateJamOperasional = async(req, res) => {
 
         res.status(201).json({msg: "update jam operasional success"});
     } catch (error) {
-        res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -82,6 +82,6 @@ export const deleteJamOperasional = async(req, res) => {
 
         res.status(201).json({msg: "delete jam operasional success"});
     } catch (error) {
-        res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 }

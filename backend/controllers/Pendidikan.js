@@ -8,7 +8,7 @@ export const getPendidikans = async(req, res) => {
 
         res.status(200).json(response);
     } catch (error) {
-        res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -23,7 +23,7 @@ export const getPendidikanById = async(req, res) => {
 
         res.status(200).json(response);
     } catch (error) {
-        res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -36,7 +36,7 @@ export const createPendidikan = async(req, res) => {
 
         res.status(201).json({msg: "success"})
     } catch (error) {
-        res.status(500).json({msg: error.msg})
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -58,7 +58,7 @@ export const updatePendidikan = async(req, res) => {
 
         res.status(201).json({msg: "success"})
     } catch (error) {
-        res.status(500).json({msg: error.msg})
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -76,6 +76,6 @@ export const deletePendidikan = async(req, res) => {
 
         res.status(201).json({msg: "success"})
     } catch (error) {
-        res.status(500).json({msg: error.msg})
+        return res.status(500).json({msg: error.message});
     }
 }

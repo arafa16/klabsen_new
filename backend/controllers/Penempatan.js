@@ -8,7 +8,7 @@ export const getPenempatans = async(req, res) => {
 
         return res.status(200).json(response);
     } catch (error) {
-        return res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -23,7 +23,7 @@ export const getPenempatanById = async(req, res) => {
 
         return res.status(200).json(response);
     } catch (error) {
-        return res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -35,7 +35,7 @@ export const createPenempatan = async(req, res) => {
 
         res.status(201).json({msg: "create penempatan success"});
     } catch (error) {
-        res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -55,7 +55,7 @@ export const updatePenempatan = async(req, res) => {
 
         res.status(201).json({msg: "create penempatan success"});
     } catch (error) {
-        res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -73,6 +73,6 @@ export const deletePenempatan = async(req, res) => {
 
         res.status(201).json({msg: "delete success"});
     } catch (error) {
-        res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 }

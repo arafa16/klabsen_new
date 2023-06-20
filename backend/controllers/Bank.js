@@ -8,7 +8,7 @@ export const getBanks = async(req, res) => {
 
         res.status(200).json(response);
     } catch (error) {
-        res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -23,7 +23,7 @@ export const getBankById = async(req, res) => {
 
         res.status(200).json(response);
     } catch (error) {
-        res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 } 
 
@@ -35,7 +35,7 @@ export const createBank = async(req, res) => {
 
         res.status(201).json({msg: "create bank success"});
     } catch (error) {
-        res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 } 
 
@@ -55,7 +55,7 @@ export const updateBank = async(req, res) => {
 
         res.status(201).json({msg: "update bank success"});
     } catch (error) {
-        res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 } 
 
@@ -73,6 +73,6 @@ export const deleteBank = async(req, res) => {
 
         res.status(201).json({msg: "delete bank success"});
     } catch (error) {
-        res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 } 

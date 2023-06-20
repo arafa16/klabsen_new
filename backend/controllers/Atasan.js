@@ -8,7 +8,7 @@ export const getAtasans = async(req, res) => {
 
         res.status(200).json({response});
     } catch (error) {
-        res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -23,7 +23,7 @@ export const getAtasanById = async(req, res) => {
 
         res.status(200).json({response});
     } catch (error) {
-        res.status(500).json({msg: error.msg});
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -35,7 +35,7 @@ export const createAtasan = async(req, res) => {
 
         res.status(201).json({msg: "success"});
     } catch (error) {
-        res.status(500).json({msg: error.msg})
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -57,7 +57,7 @@ export const updateAtasan = async(req, res) => {
 
         res.status(201).json({msg: "success"});
     } catch (error) {
-        res.status(500).json({msg: error.msg})
+        return res.status(500).json({msg: error.message});
     }
 }
 
@@ -77,6 +77,6 @@ export const deleteAtasan = async(req, res) => {
 
         res.status(201).json({msg: "success"});
     } catch (error) {
-        res.status(500).json({msg: error.msg})
+        return res.status(500).json({msg: error.message});
     }
 }
