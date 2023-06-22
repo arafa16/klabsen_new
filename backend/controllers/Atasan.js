@@ -6,7 +6,7 @@ export const getAtasans = async(req, res) => {
             attributes:['uuid','userId']
         });
 
-        res.status(200).json(response);
+        return res.status(200).json(response);
     } catch (error) {
         return res.status(500).json({msg: error.message});
     }
@@ -21,7 +21,7 @@ export const getAtasanById = async(req, res) => {
             attributes:['uuid','userId']
         });
 
-        res.status(200).json(response);
+        return res.status(200).json(response);
     } catch (error) {
         return res.status(500).json({msg: error.message});
     }
@@ -33,7 +33,7 @@ export const createAtasan = async(req, res) => {
             name:req.body.userId
         });
 
-        res.status(201).json({msg: "success"});
+        return res.status(201).json({msg: "success"});
     } catch (error) {
         return res.status(500).json({msg: error.message});
     }
@@ -55,7 +55,7 @@ export const updateAtasan = async(req, res) => {
             name:req.body.userId
         });
 
-        res.status(201).json({msg: "success"});
+        return res.status(201).json({msg: "success"});
     } catch (error) {
         return res.status(500).json({msg: error.message});
     }
@@ -75,7 +75,7 @@ export const deleteAtasan = async(req, res) => {
     try {
         findAtasan.destroy();
 
-        res.status(201).json({msg: "success"});
+        return res.status(201).json({msg: "success"});
     } catch (error) {
         return res.status(500).json({msg: error.message});
     }

@@ -6,7 +6,7 @@ export const getBanks = async(req, res) => {
             attributes:['uuid','name']
         });
 
-        res.status(200).json(response);
+        return res.status(200).json(response);
     } catch (error) {
         return res.status(500).json({msg: error.message});
     }
@@ -21,7 +21,7 @@ export const getBankById = async(req, res) => {
             attributes:['uuid','name']
         });
 
-        res.status(200).json(response);
+        return res.status(200).json(response);
     } catch (error) {
         return res.status(500).json({msg: error.message});
     }
@@ -33,7 +33,7 @@ export const createBank = async(req, res) => {
             name:req.body.name
         });
 
-        res.status(201).json({msg: "create bank success"});
+        return res.status(201).json({msg: "create bank success"});
     } catch (error) {
         return res.status(500).json({msg: error.message});
     }
@@ -53,7 +53,7 @@ export const updateBank = async(req, res) => {
             name:req.body.name
         });
 
-        res.status(201).json({msg: "update bank success"});
+        return res.status(201).json({msg: "update bank success"});
     } catch (error) {
         return res.status(500).json({msg: error.message});
     }
@@ -71,7 +71,7 @@ export const deleteBank = async(req, res) => {
     try {
         findBank.destroy();
 
-        res.status(201).json({msg: "delete bank success"});
+        return res.status(201).json({msg: "delete bank success"});
     } catch (error) {
         return res.status(500).json({msg: error.message});
     }

@@ -37,7 +37,7 @@ export const createGender = async(req, res) => {
             name:name
         });
 
-        res.status(201).json({msg: "create status success"});
+        return res.status(201).json({msg: "create status success"});
     } catch (error) {
         return res.status(500).json({msg: error.message});
     }
@@ -59,7 +59,7 @@ export const updateGender = async(req, res) => {
             name:name
         });
 
-        res.status(201).json({msg: "update status success"});
+        return res.status(201).json({msg: "update status success"});
     } catch (error) {
         return res.status(500).json({msg: error.message});
     }
@@ -77,7 +77,7 @@ export const deleteGender = async(req, res) => {
     try {
         findGander.destroy();
 
-        res.status(201).json({msg: "delete status success"});
+        return res.status(201).json({msg: "delete status success"});
     } catch (error) {
         return res.status(500).json({msg: error.message});
     }
