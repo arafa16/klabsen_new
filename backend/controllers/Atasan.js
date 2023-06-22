@@ -6,7 +6,7 @@ export const getAtasans = async(req, res) => {
             attributes:['uuid','userId']
         });
 
-        res.status(200).json({response});
+        res.status(200).json(response);
     } catch (error) {
         return res.status(500).json({msg: error.message});
     }
@@ -21,7 +21,7 @@ export const getAtasanById = async(req, res) => {
             attributes:['uuid','userId']
         });
 
-        res.status(200).json({response});
+        res.status(200).json(response);
     } catch (error) {
         return res.status(500).json({msg: error.message});
     }
