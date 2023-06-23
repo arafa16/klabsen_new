@@ -30,7 +30,7 @@ export const getAtasanById = async(req, res) => {
 export const createAtasan = async(req, res) => {
     try {
         await Atasan.create({
-            name:req.body.userId
+            userId:req.body.userId
         });
 
         return res.status(201).json({msg: "success"});

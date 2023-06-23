@@ -1,8 +1,32 @@
+import Atasan from "../models/AtasanModal.js";
 import InOut from "../models/InOutModal.js";
+import Status from "../models/StatusModel.js";
+import TipeAbsen from "../models/TipeAbsenModal.js";
+import Users from "../models/UserModel.js";
 
 export const getInOut = async(req, res) => {
     try {
-        const response = await InOut.findAll();
+        const response = await InOut.findAll({
+            attributes:['uuid','tanggalMasuk','tanggalPulang'],
+            include:[{
+                model:Users,
+                attributes:['uuid','name','absenId'],
+                include:{
+                    model:Atasan,
+                    attributes:['uuid'],
+                    include:{
+                        model:Users,
+                        attributes:['uuid','name']
+                    }
+                }
+            },{
+                model:TipeAbsen,
+                attributes:['uuid','name']
+            },{
+                model:Status,
+                attributes:['uuid','name']
+            }]
+        });
         
         return res.status(200).json(response);
     } catch (error) {
@@ -15,7 +39,26 @@ export const getInOutById = async(req, res) => {
         const response = await InOut.findOne({
             where:{
                 uuid:req.params.id
-            }
+            },
+            attributes:['uuid','tanggalMasuk','tanggalPulang'],
+            include:[{
+                model:Users,
+                attributes:['uuid','name','absenId'],
+                include:{
+                    model:Atasan,
+                    attributes:['uuid'],
+                    include:{
+                        model:Users,
+                        attributes:['uuid','name']
+                    }
+                }
+            },{
+                model:TipeAbsen,
+                attributes:['uuid','name']
+            },{
+                model:Status,
+                attributes:['uuid','name']
+            }]
         });
         
         return res.status(200).json(response);
@@ -24,8 +67,8 @@ export const getInOutById = async(req, res) => {
     }
 }
 
-export const createInOut = (req, res) => {
-    const {userId, tanggalMasuk, tanggalPulang, tipeAbsenId, statusId} = req.body;
+export const createInOut = async(req, res) => {
+    const {userId, tanggalMasuk, tanggalPulang, tipeAbsenId, pelanggaranId, statusId} = req.body;
 
     try {
         await InOut.create({
@@ -33,6 +76,7 @@ export const createInOut = (req, res) => {
             tanggalMasuk:tanggalMasuk,
             tanggalPulang:tanggalPulang,
             tipeAbsenId:tipeAbsenId,
+            pelanggaranId:pelanggaranId,
             statusId:statusId
         });
 
@@ -42,7 +86,7 @@ export const createInOut = (req, res) => {
     }
 }
 
-export const updateInOut = (req, res) => {
+export const updateInOut = async(req, res) => {
     const {userId, tanggalMasuk, tanggalPulang, tipeAbsenId, statusId} = req.body;
 
     const findInOut = await InOut.findOne({
@@ -68,7 +112,7 @@ export const updateInOut = (req, res) => {
     }
 }
 
-export const deleteInOut = (req, res) => {
+export const deleteInOut = async(req, res) => {
     const findInOut = await InOut.findOne({
         where:{
             uuid:req.params.id

@@ -22,6 +22,8 @@ import BankRoute from './routes/BankRoute.js';
 import JamOperasionalRoute from './routes/JamOperasionalRoute.js';
 import GroupRoute from './routes/GroupRoute.js';
 import JabatanRoute from './routes/JabatanRoute.js';
+import TipeAbsenRoute from './routes/TipeAbsenRoute.js';
+import PelanggaranRoute from './routes/PelanggaranRoute.js';
 
 
 import db from './config/Database.js';
@@ -67,6 +69,8 @@ app.use(BankRoute);
 app.use(JamOperasionalRoute);
 app.use(GroupRoute);
 app.use(JabatanRoute);
+app.use(TipeAbsenRoute);
+app.use(PelanggaranRoute);
 
 app.listen(process.env.APP_PORT, ()=>{
     console.log(`server running at pport ${process.env.APP_PORT}`)
