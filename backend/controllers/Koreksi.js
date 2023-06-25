@@ -1,5 +1,8 @@
 import Koreksi from "../models/KoreksiModal.js";
 import HistoryKoreksi from "../models/HistoryKoreksiModal.js";
+import Users from "../models/UserModel.js";
+import StatusKoreksi from "../models/StatusKoreksiModal.js";
+import InOut from "../models/InOutModal.js";
 
 export const getKoreksi = async(req, res) => {
     try {
@@ -28,12 +31,30 @@ export const getKoreksiById = async(req, res) => {
 export const createKoreksi = async(req, res) => {
     const {userId, inOutId, keterangan, statusKoreksiId} = req.body;
 
+    const user = await Users.findOne({
+        where:{
+            uuid:userId
+        }
+    });
+
+    const statusKoreksi = await StatusKoreksi.findOne({
+        where:{
+            uuid:statusKoreksiId
+        }
+    });
+
+    const inOut = await InOut.findOne({
+        where:{
+            uuid:inOutId
+        }
+    });
+
     try {
         await Koreksi.create({
-            userId:userId,
-            inOutId:inOutId,
+            userId:user && user.id,
+            inOutId:inOut && inOut.id,
             keterangan:keterangan,
-            statusKoreksiId:statusKoreksiId
+            statusKoreksiId:statusKoreksi && statusKoreksi.id
         });
 
         return res.status(201).json({msg: "koreksi success created"});
@@ -53,12 +74,30 @@ export const updateKoreksi = async(req, res) => {
 
     if(!findKoreksi) return res.status(404).json({msg: "not found"});
 
+    const user = await Users.findOne({
+        where:{
+            uuid:userId
+        }
+    });
+
+    const statusKoreksi = await StatusKoreksi.findOne({
+        where:{
+            uuid:statusKoreksiId
+        }
+    });
+
+    const inOut = await InOut.findOne({
+        where:{
+            uuid:inOutId
+        }
+    });
+
     try {
         findKoreksi.create({
-            userId:userId,
-            inOutId:inOutId,
+            userId:user && user.id,
+            inOutId:inOut && inOut.id,
             keterangan:keterangan,
-            statusKoreksiId:statusKoreksiId
+            statusKoreksiId:statusKoreksi && statusKoreksi.id
         });
 
         return res.status(201).json({msg: "koreksi success created"})

@@ -70,9 +70,15 @@ export const getInOutById = async(req, res) => {
 export const createInOut = async(req, res) => {
     const {userId, tanggalMasuk, tanggalPulang, tipeAbsenId, pelanggaranId, statusId} = req.body;
 
+    const user = await Users.findOne({
+        where:{
+            uuid:userId
+        }
+    });
+
     try {
         await InOut.create({
-            userId:userId,
+            userId:user && user.id,
             tanggalMasuk:tanggalMasuk,
             tanggalPulang:tanggalPulang,
             tipeAbsenId:tipeAbsenId,
@@ -97,9 +103,15 @@ export const updateInOut = async(req, res) => {
 
     if(!findInOut) return res.status(404).json({msg: "not found"});
 
+    const user = await Users.findOne({
+        where:{
+            uuid:userId
+        }
+    });
+
     try {
         findInOut.update({
-            userId:userId,
+            userId:user && user.id,
             tanggalMasuk:tanggalMasuk,
             tanggalPulang:tanggalPulang,
             tipeAbsenId:tipeAbsenId,
