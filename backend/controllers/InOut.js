@@ -1,6 +1,7 @@
 import Atasan from "../models/AtasanModal.js";
 import InOut from "../models/InOutModal.js";
 import Pelanggaran from "../models/PelanggaranModal.js";
+import StatusInout from "../models/StatusInoutModal.js";
 import Status from "../models/StatusModel.js";
 import TipeAbsen from "../models/TipeAbsenModal.js";
 import Users from "../models/UserModel.js";
@@ -24,7 +25,7 @@ export const getInOut = async(req, res) => {
                 model:TipeAbsen,
                 attributes:['uuid','name']
             },{
-                model:Status,
+                model:StatusInout,
                 attributes:['uuid','name']
             }]
         });
@@ -57,7 +58,7 @@ export const getInOutById = async(req, res) => {
                 model:TipeAbsen,
                 attributes:['uuid','name']
             },{
-                model:Status,
+                model:StatusInout,
                 attributes:['uuid','name']
             }]
         });
@@ -69,7 +70,7 @@ export const getInOutById = async(req, res) => {
 }
 
 export const createInOut = async(req, res) => {
-    const {userId, tanggalMasuk, tanggalPulang, tipeAbsenId, pelanggaranId, statusId} = req.body;
+    const {userId, tanggalMasuk, tanggalPulang, tipeAbsenId, pelanggaranId, statusInoutId} = req.body;
 
     const user = await Users.findOne({
         where:{
@@ -89,9 +90,9 @@ export const createInOut = async(req, res) => {
         }
     });
 
-    const status = await Status.findOne({
+    const statusInout = await StatusInout.findOne({
         where:{
-            uuid:statusId
+            uuid:statusInoutId
         }
     })
 
@@ -102,7 +103,7 @@ export const createInOut = async(req, res) => {
             tanggalPulang:tanggalPulang,
             tipeAbsenId:tipeAbsen && tipeAbsen.id,
             pelanggaranId:pelanggaran && pelanggaran.id,
-            statusId:status && status.id
+            statusInoutId:statusInout && statusInout.id
         });
 
         return res.status(201).json({msg: "success"});
@@ -112,7 +113,7 @@ export const createInOut = async(req, res) => {
 }
 
 export const updateInOut = async(req, res) => {
-    const {userId, tanggalMasuk, tanggalPulang, tipeAbsenId, statusId} = req.body;
+    const {userId, tanggalMasuk, tanggalPulang, tipeAbsenId, pelanggaranId, statusInoutId} = req.body;
 
     const findInOut = await InOut.findOne({
         where:{
@@ -128,13 +129,32 @@ export const updateInOut = async(req, res) => {
         }
     });
 
+    const tipeAbsen = await TipeAbsen.findOne({
+        where:{
+            uuid:tipeAbsenId
+        }
+    });
+
+    const pelanggaran = await Pelanggaran.findOne({
+        where:{
+            uuid:pelanggaranId
+        }
+    });
+
+    const statusInout = await StatusInout.findOne({
+        where:{
+            uuid:statusInoutId
+        }
+    })
+
     try {
         findInOut.update({
             userId:user && user.id,
             tanggalMasuk:tanggalMasuk,
             tanggalPulang:tanggalPulang,
-            tipeAbsenId:tipeAbsenId,
-            statusId:statusId
+            tipeAbsenId:tipeAbsen && tipeAbsen.id,
+            pelanggaranId:pelanggaran && pelanggaran.id,
+            statusInoutId:statusInout && statusInout.id
         });
 
         return res.status(201).json({msg: "success"});
