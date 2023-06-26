@@ -1,5 +1,6 @@
 import Atasan from "../models/AtasanModal.js";
 import InOut from "../models/InOutModal.js";
+import Pelanggaran from "../models/PelanggaranModal.js";
 import Status from "../models/StatusModel.js";
 import TipeAbsen from "../models/TipeAbsenModal.js";
 import Users from "../models/UserModel.js";
@@ -76,14 +77,32 @@ export const createInOut = async(req, res) => {
         }
     });
 
+    const tipeAbsen = await TipeAbsen.findOne({
+        where:{
+            uuid:tipeAbsenId
+        }
+    });
+
+    const pelanggaran = await Pelanggaran.findOne({
+        where:{
+            uuid:pelanggaranId
+        }
+    });
+
+    const status = await Status.findOne({
+        where:{
+            uuid:statusId
+        }
+    })
+
     try {
         await InOut.create({
             userId:user && user.id,
             tanggalMasuk:tanggalMasuk,
             tanggalPulang:tanggalPulang,
-            tipeAbsenId:tipeAbsenId,
-            pelanggaranId:pelanggaranId,
-            statusId:statusId
+            tipeAbsenId:tipeAbsen && tipeAbsen.id,
+            pelanggaranId:pelanggaran && pelanggaran.id,
+            statusId:status && status.id
         });
 
         return res.status(201).json({msg: "success"});

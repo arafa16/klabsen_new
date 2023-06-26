@@ -3,10 +3,35 @@ import HistoryKoreksi from "../models/HistoryKoreksiModal.js";
 import Users from "../models/UserModel.js";
 import StatusKoreksi from "../models/StatusKoreksiModal.js";
 import InOut from "../models/InOutModal.js";
+import TipeAbsen from "../models/TipeAbsenModal.js";
+import Pelanggaran from "../models/PelanggaranModal.js";
+import Status from "../models/StatusModel.js";
 
 export const getKoreksi = async(req, res) => {
     try {
-        const response = await Koreksi.findAll();
+        const response = await Koreksi.findAll({
+            attributes:['uuid','keterangan'],
+            include:[{
+                model:Users,
+                attributes:['uuid','name','absenId']
+            },{
+                model:InOut,
+                attributes:['uuid','tanggalMasuk','tanggalPulang'],
+                include:[{
+                    model:TipeAbsen,
+                    attributes:['uuid','name']
+                },{
+                    model:Pelanggaran,
+                    attributes:['uuid','name']
+                },{
+                    model:Status,
+                    attributes:['uuid','name']
+                }]
+            },{
+                model:StatusKoreksi,
+                attributes:['uuid','name']
+            }]
+        });
 
         return res.status(200).json(response);
     } catch (error) {
@@ -19,7 +44,28 @@ export const getKoreksiById = async(req, res) => {
         const response = await Koreksi.findOne({
             where:{
                 uuid:req.params.id
-            }
+            },
+            attributes:['uuid','keterangan'],
+            include:[{
+                model:Users,
+                attributes:['uuid','name','absenId']
+            },{
+                model:InOut,
+                attributes:['uuid','tanggalMasuk','tanggalPulang'],
+                include:[{
+                    model:TipeAbsen,
+                    attributes:['uuid','name']
+                },{
+                    model:Pelanggaran,
+                    attributes:['uuid','name']
+                },{
+                    model:Status,
+                    attributes:['uuid','name']
+                }]
+            },{
+                model:StatusKoreksi,
+                attributes:['uuid','name']
+            }]
         });
 
         return res.status(200).json(response);

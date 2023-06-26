@@ -25,6 +25,7 @@ import JabatanRoute from './routes/JabatanRoute.js';
 import TipeAbsenRoute from './routes/TipeAbsenRoute.js';
 import PelanggaranRoute from './routes/PelanggaranRoute.js';
 import StatusKoreksiRoute from './routes/StatusKoreksiRoute.js';
+import TipeNotificationRoute from './routes/TipeNotificationRoute.js';
 
 
 import db from './config/Database.js';
@@ -73,6 +74,7 @@ app.use(JabatanRoute);
 app.use(TipeAbsenRoute);
 app.use(PelanggaranRoute);
 app.use(StatusKoreksiRoute);
+app.use(TipeNotificationRoute);
 
 app.listen(process.env.APP_PORT, ()=>{
     console.log(`server running at pport ${process.env.APP_PORT}`)
