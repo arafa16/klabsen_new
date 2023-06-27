@@ -43,6 +43,14 @@ const Users = db.define('users', {
             len: [3, 255]
         }
     },
+    image:{
+        type: DataTypes.STRING,
+        allowNull:true
+    },
+    url:{
+        type: DataTypes.TEXT,
+        allowNull:true
+    },
     ganderId:{
         type: DataTypes.INTEGER,
         allowNull:false,
