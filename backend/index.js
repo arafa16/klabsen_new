@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import session from 'express-session';
 import dotenv from 'dotenv';
+import SequelizeStore from 'connect-session-sequelize';
 
 //tabel
 import UserRoute from './routes/UserRoute.js';
@@ -28,12 +29,19 @@ import StatusKoreksiRoute from './routes/StatusKoreksiRoute.js';
 import TipeNotificationRoute from './routes/TipeNotificationRoute.js';
 import HistoryKoreksiRoute from './routes/HistoryKoreksiRoute.js';
 import TipePendapatanRoute from './routes/TipePendapatanRoute.js';
+import AuthRoute from './routes/AuthRoute.js';
 
 import db from './config/Database.js';
 
 dotenv.config();
 
 const app = express();
+
+const sessionStore = SequelizeStore(session.Store);
+
+const store = new sessionStore({
+    db:db
+});
 
 // (async()=>{
 //     await db.sync();
@@ -43,6 +51,7 @@ app.use(session({
     secret: process.env.SESS_SECRET,
     resave: false,
     saveUninitialized: true,
+    store:store,
     cookie:{
         secure: 'auto'
     }
@@ -78,7 +87,9 @@ app.use(StatusKoreksiRoute);
 app.use(TipeNotificationRoute);
 app.use(HistoryKoreksiRoute);
 app.use(TipePendapatanRoute);
+app.use(AuthRoute);
 
+// store.sync();
 
 app.listen(process.env.APP_PORT, ()=>{
     console.log(`server running at port ${process.env.APP_PORT}`)
