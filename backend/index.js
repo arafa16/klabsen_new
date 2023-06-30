@@ -3,6 +3,7 @@ import cors from 'cors';
 import session from 'express-session';
 import dotenv from 'dotenv';
 import SequelizeStore from 'connect-session-sequelize';
+import FileUpload from 'express-fileupload';
 
 //tabel
 import UserRoute from './routes/UserRoute.js';
@@ -63,6 +64,7 @@ app.use(cors({
 }));
 
 app.use(express.json());
+app.use(FileUpload());
 app.use(UserRoute);
 app.use(StatusRoute);
 app.use(PeriodeRoute);
@@ -88,6 +90,9 @@ app.use(TipeNotificationRoute);
 app.use(HistoryKoreksiRoute);
 app.use(TipePendapatanRoute);
 app.use(AuthRoute);
+
+//setup public folder
+app.use(express.static("public"));
 
 // store.sync();
 

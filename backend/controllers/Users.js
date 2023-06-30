@@ -12,6 +12,8 @@ import Status from "../models/StatusModel.js";
 import StatusPerkawinan from "../models/StatusPerkawinanModal.js";
 import Users from "../models/UserModel.js";
 import argon from 'argon2';
+import path from 'path';
+import fs from 'fs';
 
 export const getUsers = async(req, res) => {
     try {
@@ -531,6 +533,79 @@ export const deleteUser = async(req, res) => {
         findUser.destroy();
 
         return res.status(201).json({msg: "success"});
+    } catch (error) {
+        return res.status(500).json({msg: error.message});
+    }
+}
+
+//upload photo profile
+export const updatePhoto = async(req, res) =>{
+
+    const user = await Users.findOne({
+        where:{
+            uuid:req.params.id
+        }
+    });
+    if(!user) return res.status(400).json({msg: "user not found"});
+    
+    if(req.files.photo === null) return res.status(401).json({msg: "No file Upload"});
+    const file = req.files.photo;
+    const fileSize = file.data.length;
+    const ext = path.extname(file.name);
+    const fileName = user.id+file.md5+ext;
+    const url = `${req.protocol}://${req.get("host")}/images/profile/${fileName}`;
+    const allowedType = ['.png','.jpg','.jpeg'];
+
+    //filter file type
+    if(!allowedType.includes(ext.toLowerCase())) return res.status(422).json({msg: "type file not allowed"});
+
+    //filter file size 5Mb
+    if(fileSize > 5000000) return res.status(422).json({msg: "image must be less than 5 Mb"});
+
+    //delete foto
+    if(user.image !== null){
+        const filePath = `./public/images/profile/${user.image}`;
+        fs.unlinkSync(filePath);
+    }
+
+    file.mv(`./public/images/profile/${fileName}`, async(err)=>{
+        if(err) return res.status(500).json({msg: err.message});
+        try {
+            user.update({
+                image:fileName,
+                url:url
+            });
+
+            return res.status(201).json({msg: "uploaded successfuly"});
+        } catch (error) {
+            return res.status(500).json({msg: error.message});
+        }
+    });
+}
+
+//delete foto profile
+export const deletePhoto = async(req, res) =>{
+    const user = await Users.findOne({
+        where:{
+            uuid:req.params.id
+        }
+    });
+    if(!user) return res.status(404).json({msg: "user not found"});
+
+    try {
+        if(user.image === null){
+            return res.status(201).json({msg: "image not found"});
+        }
+        
+        const filePath = `./public/images/profile/${user.image}`;
+        fs.unlinkSync(filePath);
+
+        user.update({
+            image:null,
+            url:null
+        });
+
+        return res.status(201).json({msg: "delete image successfuly"});
     } catch (error) {
         return res.status(500).json({msg: error.message});
     }
