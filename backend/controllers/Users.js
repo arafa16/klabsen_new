@@ -548,7 +548,7 @@ export const updatePhoto = async(req, res) =>{
     });
     if(!user) return res.status(400).json({msg: "user not found"});
     
-    if(req.files.photo === null) return res.status(401).json({msg: "No file Upload"});
+    if(req.files === null) return res.status(401).json({msg: "No file Upload"});
     const file = req.files.photo;
     const fileSize = file.data.length;
     const ext = path.extname(file.name);
@@ -596,7 +596,7 @@ export const deletePhoto = async(req, res) =>{
         if(user.image === null){
             return res.status(201).json({msg: "image not found"});
         }
-        
+
         const filePath = `./public/images/profile/${user.image}`;
         fs.unlinkSync(filePath);
 
