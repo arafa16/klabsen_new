@@ -15,6 +15,8 @@ import argon from 'argon2';
 import path from 'path';
 import fs from 'fs';
 
+
+
 export const getUsers = async(req, res) => {
     try {
         const response = await Users.findAll({

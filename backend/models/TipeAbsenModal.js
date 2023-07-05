@@ -18,6 +18,10 @@ const TipeAbsen = db.define('tipe_absen', {
         validate:{
             notEmpty: true
         }
+    },
+    isActive:{
+        type: DataTypes.BOOLEAN,
+        defaultValue:true
     }
 });
 

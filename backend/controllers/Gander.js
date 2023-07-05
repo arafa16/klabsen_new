@@ -3,7 +3,7 @@ import Gander from "../models/GanderModal.js";
 export const getGenders = async(req, res) => {
     try {
         const response = await Gander.findAll({
-            attributes:['uuid','name']
+            attributes:['uuid','name','isActive']
         });
 
         return res.status(200).json(response);
@@ -16,7 +16,7 @@ export const getGenders = async(req, res) => {
 export const getGenderById = async(req, res) => {
     try {
         const response = await Gander.findOne({
-            attributes:['uuid','name']
+            attributes:['uuid','name','isActive']
         },{
             where:{
                 'uuid':req.params.id

@@ -18,6 +18,10 @@ const Group = db.define('group', {
         validate:{
             notEmpty: true
         }
+    },
+    isActive:{
+        type: DataTypes.BOOLEAN,
+        defaultValue:true
     }
 });
 

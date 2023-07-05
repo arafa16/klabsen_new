@@ -41,12 +41,9 @@ const PeriodeKerja = db.define('periode_kerja', {
             notEmpty: true
         }
     },
-    statusId:{
-        type: DataTypes.INTEGER,
-        allowNull:false,
-        validate:{
-            notEmpty: true
-        }
+    isActive:{
+        type: DataTypes.BOOLEAN,
+        defaultValue:true
     }
 });
 

@@ -18,6 +18,10 @@ const GolonganDarah = db.define('golongan_darah', {
         validate:{
             notEmpty: true
         }
+    },
+    isActive:{
+        type: DataTypes.BOOLEAN,
+        defaultValue:true
     }
 });
 

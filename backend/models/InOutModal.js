@@ -57,6 +57,10 @@ const InOut = db.define('in_out', {
         validate:{
             notEmpty: true
         }
+    },
+    isActive:{
+        type: DataTypes.BOOLEAN,
+        defaultValue:true
     }
 });
 

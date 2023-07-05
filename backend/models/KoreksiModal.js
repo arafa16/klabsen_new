@@ -42,6 +42,10 @@ const Koreksi = db.define('koreksi', {
         validate:{
             notEmpty: true
         }
+    },
+    isActive:{
+        type: DataTypes.BOOLEAN,
+        defaultValue:true
     }
 });
 

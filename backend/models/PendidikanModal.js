@@ -18,6 +18,10 @@ const Pendidikan = db.define('pendidikan', {
         validate:{
             notEmpty: true
         }
+    },
+    isActive:{
+        type: DataTypes.BOOLEAN,
+        defaultValue:true
     }
 });
 

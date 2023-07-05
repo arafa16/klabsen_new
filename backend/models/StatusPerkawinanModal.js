@@ -18,6 +18,10 @@ const StatusPerkawinan = db.define('status_perkawinan', {
         validate:{
             notEmpty: true
         }
+    },
+    isActive:{
+        type: DataTypes.BOOLEAN,
+        defaultValue:true
     }
 });
 

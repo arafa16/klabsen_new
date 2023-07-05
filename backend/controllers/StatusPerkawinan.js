@@ -3,7 +3,7 @@ import StatusPerkawinan from "../models/StatusPerkawinanModal.js";
 export const getStatuses = async(req, res) => {
     try {
         const response = await StatusPerkawinan.findAll({
-            attributes:['uuid','name']
+            attributes:['uuid','name','isActive']
         });
 
         return res.status(200).json(response);
@@ -15,7 +15,7 @@ export const getStatuses = async(req, res) => {
 export const getStatusById = async(req, res) => {
     try {
         const response = await StatusPerkawinan.findOne({
-            attributes:['uuid','name']
+            attributes:['uuid','name','isActive']
         },{
             where:{
                 uuid:req.params.id

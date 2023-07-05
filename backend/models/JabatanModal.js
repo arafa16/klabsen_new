@@ -18,6 +18,10 @@ const Jabatan = db.define('jabatan', {
         validate:{
             notEmpty: true
         }
+    },
+    isActive:{
+        type: DataTypes.BOOLEAN,
+        defaultValue:true
     }
 });
 

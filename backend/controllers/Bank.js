@@ -3,7 +3,7 @@ import Bank from "../models/BankModal.js";
 export const getBanks = async(req, res) => {
     try {
         const response = await Bank.findAll({
-            attributes:['uuid','name']
+            attributes:['uuid','name','isActive']
         });
 
         return res.status(200).json(response);
@@ -18,7 +18,7 @@ export const getBankById = async(req, res) => {
             where:{
                 uuid:req.params.id
             },
-            attributes:['uuid','name']
+            attributes:['uuid','name','isActive']
         });
 
         return res.status(200).json(response);

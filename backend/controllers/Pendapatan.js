@@ -5,6 +5,7 @@ import fs from 'fs';
 import moment from 'moment';
 import excelJs from 'exceljs';
 import Users from "../models/UserModel.js";
+import TipePendapatan from "../models/TipePendapatan.js";
 
 
 export const getPendapatan = async(req, res) => {
@@ -341,14 +342,18 @@ export const exportPendapatan = async(req, res) => {
         const sheet = workbook.addWorksheet("pendapatan");
 
         const pendapatan = await Pendapatan.findAll({
-            include:{
+            include:[{
                 model:Users,
                 attributes:['nik','name']
-            }
+            },{
+                model:TipePendapatan,
+                attributes:['name']
+            }]
         });
 
-        sheet.columns = [
-            {header : "Tipe Pendapatan Id", key:"tipePendapatanId", width: 25},
+        sheet.columns= [
+            {header : "Tipe Pendapatan", key:"tipePendapatan", width: 25},
+            {header : "Tipe Pendapatan", key:"tipePendapatan", width: 25},
             {header : "User Id", key:"userId", width: 25},
             {header : "Name", key:"name", width: 25},
             {header : "Pendapatan Atas", key:"pendapatanAtas", width: 25},
@@ -381,7 +386,7 @@ export const exportPendapatan = async(req, res) => {
 
         pendapatan.map((value, index) =>{
             sheet.addRow({
-                tipePendapatanId:value.tipePendapatanId,
+                tipePendapatan:value.tipe_pendapatan.name,
                 userId:value.user.nik,
                 name:value.user.name,
                 pendapatanAtas:value.pendapatanAtas,

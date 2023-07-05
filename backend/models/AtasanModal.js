@@ -18,6 +18,10 @@ const Atasan = db.define('atasan', {
         validate:{
             notEmpty: true
         }
+    },
+    isActive:{
+        type: DataTypes.BOOLEAN,
+        defaultValue:true
     }
 });
 

@@ -12,6 +12,7 @@ import KontakEmergency from './KontakEmergencyModal.js';
 import GolonganDarah from './GolonganDarahModel.js';
 import Group from './GroupModal.js';
 import Gander from './GanderModal.js';
+import Privilege from './PrivilegeModal.js';
 
 const {DataTypes} = Sequelize;
 
@@ -200,12 +201,20 @@ const Users = db.define('users', {
             notEmpty: true
         }
     },
+    privilegeId:{
+        type: DataTypes.INTEGER,
+        allowNull:true
+    },
     statusId:{
         type: DataTypes.INTEGER,
         allowNull:false,
         validate:{
             notEmpty: true
         }
+    },
+    isActive:{
+        type: DataTypes.BOOLEAN,
+        defaultValue:true
     }
 });
 
@@ -241,5 +250,8 @@ Users.belongsTo(Group, {foreignKey: 'groupId'});
 
 Status.hasMany(Users);
 Users.belongsTo(Status, {foreignKey: 'statusId'});
+
+Privilege.hasMany(Users);
+Users.belongsTo(Privilege, {foreignKey: 'privilegeId'});
 
 export default Users;

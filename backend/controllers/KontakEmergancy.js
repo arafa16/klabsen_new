@@ -3,7 +3,7 @@ import KontakEmergency from "../models/KontakEmergencyModal.js";
 export const getKontaks = async(req, res) => {
     try {
         const response = await KontakEmergency.findAll({
-            attributes:['uuid','name']
+            attributes:['uuid','name','isActive']
         });
 
         res.status(200).json(response);
@@ -18,7 +18,7 @@ export const getKontakById = async(req, res) => {
             where:{
                 uuid:req.params.id
             },
-            attributes:['uuid','name']
+            attributes:['uuid','name','isActive']
         });
 
         res.status(200).json(response);

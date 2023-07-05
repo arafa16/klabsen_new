@@ -33,6 +33,10 @@ const HistoryKoreksi = db.define('history_koreksi', {
         validate:{
             notEmpty: true
         }
+    },
+    isActive:{
+        type: DataTypes.BOOLEAN,
+        defaultValue:true
     }
 });
 

@@ -18,6 +18,10 @@ const TipeNotification = db.define('tipe_notification', {
         validate:{
             notEmpty: true
         }
+    },
+    isActive:{
+        type: DataTypes.BOOLEAN,
+        defaultValue:true
     }
 });
 

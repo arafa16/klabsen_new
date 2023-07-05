@@ -3,7 +3,7 @@ import JamOperasional from "../models/JamOperasionalModal.js";
 export const getJamOperasionals = async(req, res) => {
     try {
         const response = await JamOperasional.findAll({
-            attributes:['uuid','name','jamMasuk','jamPulang','keterangan']
+            attributes:['uuid','name','jamMasuk','jamPulang','keterangan','isActive']
         });
 
         return res.status(200).json(response);
@@ -18,7 +18,7 @@ export const getJamOperasionalById = async(req, res) => {
             where:{
                 uuid:req.params.id
             },
-            attributes:['uuid','name','jamMasuk','jamPulang','keterangan']
+            attributes:['uuid','name','jamMasuk','jamPulang','keterangan','isActive']
         });
 
         return res.status(200).json(response);

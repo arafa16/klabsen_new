@@ -18,6 +18,10 @@ const KontakEmergency = db.define('kontak_emergency', {
         validate:{
             notEmpty: true
         }
+    },
+    isActive:{
+        type: DataTypes.BOOLEAN,
+        defaultValue:true
     }
 });
 

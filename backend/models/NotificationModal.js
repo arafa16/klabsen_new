@@ -36,12 +36,9 @@ const Notification = db.define('notification', {
             notEmpty: true
         }
     },
-    statusId:{
-        type: DataTypes.INTEGER,
-        allowNull:false,
-        validate:{
-            notEmpty: true
-        }
+    isActive:{
+        type: DataTypes.BOOLEAN,
+        defaultValue:true
     }
 });
 

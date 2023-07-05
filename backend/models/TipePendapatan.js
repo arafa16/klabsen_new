@@ -18,6 +18,10 @@ const TipePendapatan = db.define('tipe_pendapatan', {
         validate:{
             notEmpty: true
         }
+    },
+    isActive:{
+        type: DataTypes.BOOLEAN,
+        defaultValue:true
     }
 });
 

@@ -3,7 +3,7 @@ import Status from '../models/StatusModel.js';
 export const getStatus = async(req, res) => {
     try {
         const response = await Status.findAll({
-            attributes:['uuid','name']
+            attributes:['uuid','name','isActive']
         });
         return res.status(200).json(response);
     } catch (error) {
@@ -17,7 +17,7 @@ export const getStatusById = async(req, res) => {
             where:{
                 'uuid':req.params.id
             },
-            attributes:['uuid','name']
+            attributes:['uuid','name','isActive']
         });
         return res.status(200).json(response);
     } catch (error) {

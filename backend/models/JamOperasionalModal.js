@@ -36,6 +36,10 @@ const JamOperasional = db.define('jam_operasional', {
     keterangan:{
         type: DataTypes.STRING,
         allowNull:true
+    },
+    isActive:{
+        type: DataTypes.BOOLEAN,
+        defaultValue:true
     }
 });
 

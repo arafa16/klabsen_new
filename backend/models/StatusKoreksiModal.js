@@ -18,6 +18,10 @@ const StatusKoreksi = db.define('status_koreksi', {
         validate:{
             notEmpty: true
         }
+    },
+    isActive:{
+        type: DataTypes.BOOLEAN,
+        defaultValue:true
     }
 });
 

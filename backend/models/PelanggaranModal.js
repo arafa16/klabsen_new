@@ -18,6 +18,10 @@ const Pelanggaran = db.define('pelanggaran', {
         validate:{
             notEmpty: true
         }
+    },
+    isActive:{
+        type: DataTypes.BOOLEAN,
+        defaultValue:true
     }
 });
 

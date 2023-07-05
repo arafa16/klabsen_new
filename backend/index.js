@@ -31,6 +31,8 @@ import TipeNotificationRoute from './routes/TipeNotificationRoute.js';
 import HistoryKoreksiRoute from './routes/HistoryKoreksiRoute.js';
 import TipePendapatanRoute from './routes/TipePendapatanRoute.js';
 import AuthRoute from './routes/AuthRoute.js';
+import PrivilegeRoute from './routes/PrivilegeRoute.js';
+
 
 import db from './config/Database.js';
 
@@ -90,6 +92,7 @@ app.use(TipeNotificationRoute);
 app.use(HistoryKoreksiRoute);
 app.use(TipePendapatanRoute);
 app.use(AuthRoute);
+app.use(PrivilegeRoute);
 
 //setup public folder
 app.use(express.static("public"));

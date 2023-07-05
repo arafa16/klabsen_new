@@ -3,7 +3,7 @@ import Jabatan from "../models/JabatanModal.js";
 export const getJabatans = async(req, res) => {
     try {
         const response = await Jabatan.findAll({
-            attributes:["uuid","name"]
+            attributes:["uuid","name","isActive"]
         });
 
         return res.status(200).json(response);
@@ -18,7 +18,7 @@ export const getJabatanById = async(req, res) => {
             where:{
                 uuid:req.params.id
             },
-            attributes:["uuid","name"]
+            attributes:["uuid","name","isActive"]
         });
 
         return res.status(200).json(response);

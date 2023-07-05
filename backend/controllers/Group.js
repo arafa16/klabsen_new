@@ -3,7 +3,7 @@ import Group from "../models/GroupModal.js";
 export const getGroups = async(req, res) => {
     try {
         const response = await Group.findAll({
-            attributes:['uuid','name']
+            attributes:['uuid','name','isActive']
         });
 
         res.status(200).json(response);
@@ -18,7 +18,7 @@ export const getGroupById = async(req, res) => {
             where:{
                 uuid:req.params.id
             },
-            attributes:['uuid','name']
+            attributes:['uuid','name','isActive']
         });
 
         res.status(200).json(response);

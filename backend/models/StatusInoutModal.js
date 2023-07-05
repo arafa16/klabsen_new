@@ -18,6 +18,10 @@ const StatusInout = db.define('status_inout', {
         validate:{
             notEmpty: true
         }
+    },
+    isActive:{
+        type: DataTypes.BOOLEAN,
+        defaultValue:true
     }
 });
 

@@ -3,7 +3,7 @@ import Penempatan from "../models/PenempatanModel.js";
 export const getPenempatans = async(req, res) => {
     try {
         const response = await Penempatan.findAll({
-            attributes:['uuid','name']
+            attributes:['uuid','name','isActive']
         });
 
         return res.status(200).json(response);
@@ -18,7 +18,7 @@ export const getPenempatanById = async(req, res) => {
             where:{
                 'uuid':req.params.id
             },
-            attributes:['uuid','name']
+            attributes:['uuid','name','isActive']
         });
 
         return res.status(200).json(response);

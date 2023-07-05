@@ -18,6 +18,10 @@ const Penempatan = db.define('penempatan', {
         validate:{
             notEmpty: true
         }
+    },
+    isActive:{
+        type: DataTypes.BOOLEAN,
+        defaultValue:true
     }
 });
 
