@@ -16,7 +16,6 @@ import path from 'path';
 import fs from 'fs';
 
 
-
 export const getUsers = async(req, res) => {
     try {
         const response = await Users.findAll({
@@ -48,7 +47,8 @@ export const getUsers = async(req, res) => {
                 'alamatEmergency',
                 'nomorSim',
                 'nomorRekening',
-                'quote'
+                'quote',
+                'isActive'
             ],
             include:[
                 {
@@ -134,7 +134,8 @@ export const getUserById = async(req, res) => {
                 'alamatEmergency',
                 'nomorSim',
                 'nomorRekening',
-                'quote'
+                'quote',
+                'isActive'
             ],
             include:[
                 {
@@ -322,7 +323,7 @@ export const createUser = async(req, res) => {
             statusPerkawinanId:statusPerkawinan && statusPerkawinan.id,
             jumlahAnak:jumlahAnak,
             namaIbu:namaIbu,
-            pendidikanId:pendidikan && pendidikanId,
+            pendidikanId:pendidikan && pendidikan.id,
             namaSekolah:namaSekolah,
             jurusanSekolah:jurusanSekolah,
             tahunLulus:tahunLulus,

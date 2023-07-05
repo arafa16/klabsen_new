@@ -12,7 +12,7 @@ export const getInOut = async(req, res) => {
             attributes:['uuid','tanggalMasuk','tanggalPulang'],
             include:[{
                 model:Users,
-                attributes:['uuid','name','absenId'],
+                attributes:['uuid','name','absenId','isActive'],
                 include:{
                     model:Atasan,
                     attributes:['uuid'],
@@ -42,7 +42,7 @@ export const getInOutById = async(req, res) => {
             where:{
                 uuid:req.params.id
             },
-            attributes:['uuid','tanggalMasuk','tanggalPulang'],
+            attributes:['uuid','tanggalMasuk','tanggalPulang','isActive'],
             include:[{
                 model:Users,
                 attributes:['uuid','name','absenId'],
