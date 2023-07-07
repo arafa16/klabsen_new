@@ -18,11 +18,13 @@ export const Login = async(req, res) =>{
     const name = user.name;
     const email = user.email;
     
-    return res.status(200).json({uuid, name, email});
+    res.status(200).json({uuid, name, email});
 }
 
 export const getMe = async(req, res) => {
-    if(!req.session.userId) return res.status(400).json({msg: "anda belum login"});
+    if(!req.session.userId){
+        return res.status(401).json({msg: "Mohon login ke akun Anda!"});
+    }
 
     const user = await Users.findOne({
         where:{
@@ -33,7 +35,7 @@ export const getMe = async(req, res) => {
 
     if(!user) return res.status(404).json({msg: "user not found"});
 
-    return res.status(200).json(user);
+    res.status(200).json(user);
 }
 
 export const Logout = async(req, res) => {
