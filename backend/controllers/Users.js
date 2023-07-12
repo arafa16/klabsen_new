@@ -230,6 +230,7 @@ export const createUser = async(req, res) => {
     
     const hasPassword = await argon.hash(password);
 
+
     const gander = await  Gander.findOne({
         where:{
             uuid:ganderId
@@ -313,7 +314,7 @@ export const createUser = async(req, res) => {
             nomorHp:nomorHp,
             penempatanId:penempatan && penempatan.id,
             jabatanId:jabatan && jabatan.id,
-            atasanId:atasan && jabatan.id,
+            atasanId:atasan && atasan.id,
             nomorKtp:nomorKtp,
             alamatKtp:alamatKtp,
             alamatDomisili:alamatDomisili,
@@ -402,72 +403,84 @@ export const updateUser = async(req, res) => {
 
     const hasPassword = await argon.hash(password);
 
+    console.log("gander");
     const gander = await  Gander.findOne({
         where:{
             uuid:ganderId
         }
     });
 
+    console.log("penempatan");
     const penempatan = await Penempatan.findOne({
         where:{
             uuid:penempatanId
         }
     });
 
+    console.log("jabatan");
     const jabatan = await Jabatan.findOne({
         where:{
             uuid:jabatanId
         }
     });
 
+    console.log("atasan");
     const atasan = await Atasan.findOne({
         where:{
             uuid:atasanId
         }
     });
 
+    console.log("pendidikan");
     const pendidikan = await Pendidikan.findOne({
         where:{
             uuid:pendidikanId
         }
     });
 
+    console.log("statusPerkawinan");
     const statusPerkawinan = await StatusPerkawinan.findOne({
         where:{
             uuid:statusPerkawinanId
         }
     });
 
+    console.log("kontakEmergency");
     const kontakEmergency = await KontakEmergency.findOne({
         where:{
             uuid:kontakEmergencyId
         }
     });
 
+    console.log("golonganDarah");
     const golonganDarah = await GolonganDarah.findOne({
         where:{
             uuid:golonganDarahId
         }
     });
 
+    console.log("bank");
     const bank = await Bank.findOne({
         where:{
             uuid:bankId
         }
     });
 
+    console.log("jamOperasional");
     const jamOperasional = await JamOperasional.findOne({
         where:{
             uuid:jamOperasionalId
         }
     });
 
+    console.log("group");
     const group = await Group.findOne({
         where:{
             uuid:groupId
         }
     });
 
+    console.log("status");
     const status = await Status.findOne({
         where:{
             uuid:statusId

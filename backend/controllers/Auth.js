@@ -1,3 +1,4 @@
+import Group from "../models/GroupModal.js";
 import Users from "../models/UserModel.js";
 import argon2 from 'argon2';
 
@@ -14,6 +15,8 @@ export const Login = async(req, res) =>{
 
     req.session.userId = user.uuid;
 
+    console.log(req.session, "session login 2");
+
     const uuid = user.uuid;
     const name = user.name;
     const email = user.email;
@@ -22,6 +25,8 @@ export const Login = async(req, res) =>{
 }
 
 export const getMe = async(req, res) => {
+    console.log(req.session);
+
     if(!req.session.userId){
         return res.status(401).json({msg: "Mohon login ke akun Anda!"});
     }
@@ -30,7 +35,14 @@ export const getMe = async(req, res) => {
         where:{
             uuid:req.session.userId
         },
-        attributes:['uuid','absenId','nik','name','image','url','email','jamOperasionalId']
+        attributes:['uuid','absenId','nik','name','image','url','email','jamOperasionalId'],
+        include:[
+            {
+                model:Group,
+                attributes:['name']
+            }
+        ]
+
     });
 
     if(!user) return res.status(404).json({msg: "user not found"});

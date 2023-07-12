@@ -14,6 +14,8 @@ export const LoginUser = createAsyncThunk("user/LoginUser", async(user, thunkAPI
         const response = await axios.post(import.meta.env.VITE_REACT_APP_API_URL+'/login', {
             email: user.email,
             password: user.password
+        },{
+            withCredentials: true, // Now this is was the missing piece in the client side 
         });
         return response.data;
     } catch (error) {
@@ -26,11 +28,48 @@ export const LoginUser = createAsyncThunk("user/LoginUser", async(user, thunkAPI
 
 export const RegisterUser = createAsyncThunk("user/RegisterUser", async(user, thunkAPI) => {
     try {
+        console.log("sampai register slice");
         const response = await axios.post(import.meta.env.VITE_REACT_APP_API_URL+'/users', {
-            name: user.name,
+            nik: user.nik,
+            absenId: user.absenId,
+            name: user.name, 
+            ganderId: user.ganderId, 
             email: user.email,
-            password: user.password,
-            confPassword: user.confPassword
+            extention: user.extention,
+            nomorHp: user.nomorHp,
+            penempatanId: user.penempatanId,
+            jabatanId: user.jabatanId,
+            atasanId: user.atasanId,
+            nomorKtp: user.nomorKtp,
+            alamatKtp: user.alamatKtp,
+            alamatDomisili: user.alamatDomisili,
+            tempatLahir: user.tempatLahir,
+            tanggalLahir: user.tanggalLahir,
+            nomorNpwp: user.nomorNpwp,
+            statusPerkawinanId: user.statusPerkawinanId,
+            jumlahAnak: user.jumlahAnak,
+            namaIbu: user.namaIbu,
+            pendidikanId: user.pendidikanId,
+            namaSekolah: user.namaSekolah,
+            jurusanSekolah: user.jurusanSekolah,
+            tahunLulus: user.tahunLulus,
+            ipk: user.ipk,
+            nomorBpjsKesehatan: user.nomorBpjsKesehatan,
+            nomorBpjsKetenagaKerja: user.nomorBpjsKetenagaKerja,
+            kontakEmergencyId: user.kontakEmergencyId,
+            nomorEmergency: user.nomorEmergency,
+            alamatEmergency: user.alamatEmergency,
+            nomorSim: user.nomorSim,
+            golonganDarahId: user.golonganDarahId,
+            bankId: user.bankId,
+            nomorRekening: user.nomorRekening,
+            jamOperasionalId: user.jamOperasionalId,
+            groupId: user.groupId,
+            statusId: null,
+            quote: null,
+            password: user.password
+        },{
+            withCredentials: true, // Now this is was the missing piece in the client side 
         });
         return response.data;
     } catch (error) {
@@ -43,7 +82,9 @@ export const RegisterUser = createAsyncThunk("user/RegisterUser", async(user, th
 
 export const getMe = createAsyncThunk("user/getMe", async(_, thunkAPI) => {
     try {
-        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+'/me');
+        const response = await axios.get(import.meta.env.VITE_REACT_APP_API_URL+'/me',{
+            withCredentials: true, // Now this is was the missing piece in the client side 
+        });
         return response.data;
     } catch (error) {
         if(error.response){
@@ -54,7 +95,10 @@ export const getMe = createAsyncThunk("user/getMe", async(_, thunkAPI) => {
 });
 
 export const LogOut = createAsyncThunk("user/LogOut", async() => {
-    await axios.delete(import.meta.env.VITE_REACT_APP_API_URL+'/logout');
+    await axios.delete(import.meta.env.VITE_REACT_APP_API_URL+'/logout',{
+        withCredentials: true, // Now this is was the missing piece in the client side 
+    });
+    console.log("logout men")
 });
 
 export const authSlice = createSlice({
@@ -64,6 +108,7 @@ export const authSlice = createSlice({
         reset: (state) => initialState
     },
     extraReducers:(builder) => {
+        //login
         builder.addCase(LoginUser.pending, (state) => {
             state.isLoading = true;
         });

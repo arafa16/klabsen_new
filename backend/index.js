@@ -53,17 +53,20 @@ const store = new sessionStore({
 app.use(session({
     secret: process.env.SESS_SECRET,
     resave: false,
-    proxy: true,
-    saveUninitialized: true,
+    proxy: false,
+    saveUninitialized: false,
     store:store,
-    cookie:{
-        secure: 'auto'
+    cookie: {
+        httpOnly: true,
+        secure: false,
+        maxAge: 1000 * 60 * 60
     }
 }));
 
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:3000'
+    origin: 'http://localhost:5173',
+    methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "DELETE"]
 }));
 
 app.use(express.json());

@@ -1,4 +1,3 @@
-import { Transition } from "react-transition-group";
 import {
   useState,
   useEffect,
@@ -7,15 +6,19 @@ import {
   createRef,
   useRef,
 } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getMe, LogOut, reset } from "../../stores/features/authSlice";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+
+import { Transition } from "react-transition-group";
 import useCallbackState from "../../utils/callback-state";
 import { selectSideMenu } from "../../stores/sideMenuSlice";
 import { selectDarkMode } from "../../stores/darkModeSlice";
 import { useAppSelector } from "../../stores/hooks";
 import { FormattedMenu, linkTo, nestedMenu, enter, leave } from "./side-menu";
 import Lucide from "../../base-components/Lucide";
-import logoUrl from "../../assets/images/logo.svg";
-import logoDarkUrl from "../../assets/images/logo-dark.svg";
+import logoKopkarla from "../../assets/images/logo.png";
+import logoKopkarlaWhite from "../../assets/images/logo-white.png";
 import clsx from "clsx";
 import TopBar from "../../components/TopBar";
 import DarkModeSwitcher from "../../components/DarkModeSwitcher";
@@ -23,6 +26,20 @@ import MainColorSwitcher from "../../components/MainColorSwitcher";
 import SimpleBar from "simplebar";
 
 function Main() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {user, isError} = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    dispatch(getMe());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (isError) {
+      navigate("/login");
+    }
+  }, [isError, navigate]);
+
   const location = useLocation();
   const [formattedMenu, setFormattedMenu] = useState<
     Array<FormattedMenu | string>
@@ -176,7 +193,7 @@ function Main() {
                   simpleMenu.active &&
                     "xl:ml-5 transition-all duration-200 ease-in-out",
                 ])}
-                src={darkMode ? logoUrl : logoDarkUrl}
+                src={darkMode ? logoKopkarlaWhite : logoKopkarla}
                 data-logo
               />
               <span
@@ -187,10 +204,13 @@ function Main() {
                     "xl:opacity-0 transition-opacity duration-200 ease-in-out",
                 ])}
               >
-                Lucent
+                Kopkarla 
               </span>
             </Link>
-            <a
+
+            {/* start di non actifkan karena menu hide di belakang menu utama */}
+
+            {/* <a
               href="#"
               onClick={toggleSimpleMenu}
               className={clsx([
@@ -207,7 +227,10 @@ function Main() {
                   simpleMenu.active && "transform rotate-180",
                 ])}
               />
-            </a>
+            </a> */}
+
+            {/* end di non actifkan karena menu hide di belakang menu utama */}
+
             <a
               href="#"
               onClick={toggleMobileMenu}
@@ -377,7 +400,7 @@ function Main() {
             { "xl:pr-1": simpleMenu.wrapper },
           ])}
         >
-          <TopBar toggleMobileMenu={toggleMobileMenu} />
+          <TopBar name={user && user.name} group={user && user.group.name} toggleMobileMenu={toggleMobileMenu} />
           <div className="xl:px-6 mt-2.5">
             <Outlet />
           </div>

@@ -22,8 +22,8 @@ import CrudForm from "../pages/CrudForm";
 import WizardLayout1 from "../pages/WizardLayout1";
 import WizardLayout2 from "../pages/WizardLayout2";
 import WizardLayout3 from "../pages/WizardLayout3";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
+// import Login from "../pages/Login";
+// import Register from "../pages/Register";
 import ErrorPage from "../pages/ErrorPage";
 import RegularTable from "../pages/RegularTable";
 import Tabulator from "../pages/Tabulator";
@@ -49,6 +49,10 @@ import Validation from "../pages/Validation";
 import Chart from "../pages/Chart";
 import Slider from "../pages/Slider";
 import ImageZoom from "../pages/ImageZoom";
+
+// data yang digunakan
+import Register from "../pages/Auth/register";
+import Login from "../pages/Auth/login";
 
 function Router() {
   const routes = [

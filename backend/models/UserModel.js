@@ -207,10 +207,7 @@ const Users = db.define('users', {
     },
     statusId:{
         type: DataTypes.INTEGER,
-        allowNull:false,
-        validate:{
-            notEmpty: true
-        }
+        allowNull:true
     },
     isActive:{
         type: DataTypes.BOOLEAN,

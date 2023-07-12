@@ -1,14 +1,28 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { LogOut, reset } from "../../stores/features/authSlice";
+import { useNavigate } from "react-router-dom";
+
 import Lucide from "../../base-components/Lucide";
 import Breadcrumb from "../../base-components/Breadcrumb";
-import { FormInput } from "../../base-components/Form";
+// import { FormInput } from "../../base-components/Form";
 import { Menu, Popover, Dialog } from "../../base-components/Headless";
 import fakerData from "../../utils/faker";
 import _ from "lodash";
 import clsx from "clsx";
 
-function Main(props: { toggleMobileMenu: (event: React.MouseEvent) => void }) {
+function Main(props: { toggleMobileMenu: (event: React.MouseEvent) => void, name: string, group: string, logOut:void }) {
+  const {name, group} = props;
   const [searchResultModal, setSearchResultModal] = useState(false);
+  const dispath = useDispatch();
+  const navigate = useNavigate();
+
+  const getLogout = () => {
+    console.log("logout");
+    dispath(LogOut());
+    dispath(reset());
+    navigate("/login");
+  }
 
   // Show search result modal
   const showSearchResultModal = () => {
@@ -56,7 +70,7 @@ function Main(props: { toggleMobileMenu: (event: React.MouseEvent) => void }) {
         {/* END: Mobile Menu */}
         {/* BEGIN: Search */}
         <div className="relative ml-auto intro-x sm:mx-auto">
-          <div className="relative hidden sm:block">
+          {/* <div className="relative hidden sm:block">
             <FormInput
               onClick={showSearchResultModal}
               type="text"
@@ -73,11 +87,11 @@ function Main(props: { toggleMobileMenu: (event: React.MouseEvent) => void }) {
               icon="Search"
               className="w-5 h-5 mr-5 dark:text-slate-500"
             />
-          </a>
+          </a> */}
         </div>
         {/* END: Search */}
         {/* BEGIN: Search Result */}
-        <Dialog
+        {/* <Dialog
           size="lg"
           open={searchResultModal}
           onClose={() => {
@@ -184,7 +198,7 @@ function Main(props: { toggleMobileMenu: (event: React.MouseEvent) => void }) {
               </div>
             </div>
           </Dialog.Panel>
-        </Dialog>
+        </Dialog> */}
         {/* END: Search Result */}
         {/* BEGIN: Notifications */}
         <Popover className="mr-5 intro-x sm:mr-6">
@@ -232,11 +246,11 @@ function Main(props: { toggleMobileMenu: (event: React.MouseEvent) => void }) {
         </Popover>
         {/* END: Notifications */}
         {/* BEGIN: Notifications */}
-        <div className="mr-auto intro-x sm:mr-6">
+        {/* <div className="mr-auto intro-x sm:mr-6">
           <div className="relative cursor-pointer">
             <Lucide icon="Inbox" className="w-5 h-5 dark:text-slate-500" />
           </div>
-        </div>
+        </div> */}
         {/* END: Notifications */}
         {/* BEGIN: Account Menu */}
         <Menu className="h-10 intro-x">
@@ -250,10 +264,10 @@ function Main(props: { toggleMobileMenu: (event: React.MouseEvent) => void }) {
             </div>
             <div className="hidden ml-3 md:block">
               <div className="max-w-[7rem] truncate font-medium">
-                {fakerData[0]["users"][0]["name"]}
+                {name}
               </div>
               <div className="text-xs text-slate-400">
-                {fakerData[0]["jobs"][0]}
+                {group}
               </div>
             </div>
           </Menu.Button>
@@ -271,8 +285,8 @@ function Main(props: { toggleMobileMenu: (event: React.MouseEvent) => void }) {
               <Lucide icon="HelpCircle" className="w-4 h-4 mr-2" /> Help
             </Menu.Item>
             <Menu.Divider />
-            <Menu.Item>
-              <Lucide icon="ToggleRight" className="w-4 h-4 mr-2" /> Logout
+            <Menu.Item onClick={()=>getLogout()}>
+              <Lucide icon="ToggleRight" className="w-4 h-4 mr-2"  /> Logout
             </Menu.Item>
           </Menu.Items>
         </Menu>
