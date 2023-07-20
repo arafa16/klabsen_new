@@ -1,68 +1,69 @@
+import React, {useEffect, useState} from "react";
+
 import "@fullcalendar/react/dist/vdom";
 import FullCalendar from "@fullcalendar/react";
 import interactionPlugin from "@fullcalendar/interaction";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
-import { CalendarOptions } from "@fullcalendar/common";
+import { CalendarOptions, EventClickArg } from "@fullcalendar/common";
 
-function Main() {
+type TypeProps = {
+  inOuts: string
+}
+
+type TypeData = {
+  uuid:string
+  title: string
+  start: string
+  display: string
+  color: string
+  className: string
+}
+
+function Main(props: TypeProps) {
+  const {inOuts} = props;
+  const datas = [];
+
+  for(var i = 0; i < inOuts?.length; i++){
+    datas.push({
+      id:inOuts[i].uuid,
+      title:inOuts[i].tipe_absen.name,
+      start:inOuts[i].tanggalMulai,
+      display: 'list-item',
+      color: `${inOuts[i].pelanggaran.uuid === '951bcf0d-a100-434b-bbd5-7ce8df6c70bd'  ? 'red' : ''}`,
+      className: 'cursor-pointer'
+    })
+    console.log(datas);
+  }
+
   const options: CalendarOptions = {
     plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
-    droppable: true,
+    droppable: false,
     headerToolbar: {
       left: "prev,next today",
       center: "title",
-      right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
+      right: ""
     },
-    initialDate: "2021-01-12",
+    initialDate: Date.now(),
     navLinks: true,
-    editable: true,
+    editable: false,
     dayMaxEvents: true,
-    events: [
-      {
-        title: "Vue Vixens Day",
-        start: "2021-01-05",
-        end: "2021-01-08",
-      },
-      {
-        title: "VueConfUS",
-        start: "2021-01-11",
-        end: "2021-01-15",
-      },
-      {
-        title: "VueJS Amsterdam",
-        start: "2021-01-17",
-        end: "2021-01-21",
-      },
-      {
-        title: "Vue Fes Japan 2019",
-        start: "2021-01-21",
-        end: "2021-01-24",
-      },
-      {
-        title: "Laracon 2021",
-        start: "2021-01-24",
-        end: "2021-01-27",
-      },
-    ],
-    drop: function (info) {
-      if (
-        document.querySelectorAll("#checkbox-events").length &&
-        (document.querySelectorAll("#checkbox-events")[0] as HTMLInputElement)
-          ?.checked
-      ) {
-        (info.draggedEl.parentNode as HTMLElement).remove();
-        if (
-          document.querySelectorAll("#calendar-events")[0].children.length == 1
-        ) {
-          document
-            .querySelectorAll("#calendar-no-events")[0]
-            .classList.remove("hidden");
-        }
-      }
+    events: datas,
+    eventClassNames: '',
+    eventTimeFormat: { // like '14:30:00'
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
     },
+    eventClick: function (info){
+      clikInfo(info)
+    }
   };
+
+  const clikInfo = (info: EventClickArg) => {
+    alert('haiii');
+  }
 
   return (
     <div className="full-calendar">

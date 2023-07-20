@@ -140,7 +140,7 @@ const Users = db.define('users', {
         allowNull:true
     },
     ipk:{
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull:true
     },
     nomorBpjsKesehatan:{
@@ -244,6 +244,9 @@ Users.belongsTo(JamOperasional, {foreignKey: 'jamOperasionalId'});
 
 Group.hasMany(Users);
 Users.belongsTo(Group, {foreignKey: 'groupId'});
+
+Bank.hasMany(Users);
+Users.belongsTo(Bank, {foreignKey: 'bankId'});
 
 Status.hasMany(Users);
 Users.belongsTo(Status, {foreignKey: 'statusId'});

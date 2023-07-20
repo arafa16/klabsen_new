@@ -76,7 +76,7 @@ const linkTo = (menu: FormattedMenu, navigate: NavigateFunction) => {
     menu.activeDropdown = !menu.activeDropdown;
   } else {
     if (menu.pathname !== undefined) {
-      navigate(menu.pathname);
+      navigate(menu.pathname, {state:{name: menu.title}});
     }
   }
 };

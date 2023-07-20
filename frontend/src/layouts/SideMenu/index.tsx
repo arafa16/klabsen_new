@@ -400,7 +400,7 @@ function Main() {
             { "xl:pr-1": simpleMenu.wrapper },
           ])}
         >
-          <TopBar name={user && user.name} group={user && user.group.name} toggleMobileMenu={toggleMobileMenu} />
+          <TopBar url={user && user.url} name={user && user.name} group={user && user.group.name} toggleMobileMenu={toggleMobileMenu} />
           <div className="xl:px-6 mt-2.5">
             <Outlet />
           </div>

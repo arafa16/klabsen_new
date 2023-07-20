@@ -16,6 +16,7 @@ import jabatanSLice from "./features/jabatanSlice";
 import atasanSLice from "./features/atasanSlice";
 import jamOperasionalSlice from "./features/jamOperasionalSlice";
 import groupSlice from "./features/groupSlice";
+import InoutSlice from "./features/InoutSlice";
 
 export const store = configureStore({
   reducer: {
@@ -33,7 +34,8 @@ export const store = configureStore({
     jabatans: jabatanSLice,
     atasans: atasanSLice,
     jamOperasionals: jamOperasionalSlice,
-    groups: groupSlice
+    groups: groupSlice,
+    inOuts:InoutSlice
   }
 });
 

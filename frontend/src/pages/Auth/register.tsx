@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 //get data by reducer
 import { getGanders } from "../../stores/features/ganderSlice";
@@ -11,7 +12,7 @@ import { getKontakEmergency } from "../../stores/features/kontakEmergencySlice";
 import { getPenempatans } from "../../stores/features/penempatanSlice";
 import { getJabatans } from "../../stores/features/jabatanSlice";
 import { getAtasans } from "../../stores/features/atasanSlice";
-import { RegisterUser } from "../../stores/features/authSlice";
+import { RegisterUser, reset } from "../../stores/features/authSlice";
 import { getJamOperasionals } from "../../stores/features/jamOperasionalSlice";
 import { getGroups } from "../../stores/features/groupSlice";
 
@@ -21,6 +22,7 @@ import Button from "../../base-components/Button";
 import { FormInput, FormLabel, FormSelect } from "../../base-components/Form";
 import Litepicker from "../../base-components/Litepicker";
 import LoadingIcon from "../../base-components/LoadingIcon";
+
 
 function Main() {
   const [show, setShow] = useState(1);
@@ -78,6 +80,14 @@ function Main() {
   const [statusId, setStatusId] = useState("744cf642-ae53-487c-8dd4-24bb2b7bf068");
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    if(isSuccess){
+      navigate('/login');
+    }
+    dispatch(reset());
+  },[isSuccess, dispatch]);
 
   //get selector ganders
   const {ganders} = useSelector(

@@ -1,7 +1,15 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import axios from 'axios';
 
-const initialState = {
+interface variabel {
+    user: Array;
+    isError: boolean;
+    isSuccess: boolean;
+    isLoading: boolean;
+    message: string;
+}
+
+const initialState : variabel = {
     user: null,
     isError: false,
     isSuccess: false,
@@ -18,7 +26,7 @@ export const LoginUser = createAsyncThunk("user/LoginUser", async(user, thunkAPI
             withCredentials: true, // Now this is was the missing piece in the client side 
         });
         return response.data;
-    } catch (error) {
+    } catch (error:void) {
         if(error.response){
             const message = error.response.data.msg;
             return thunkAPI.rejectWithValue(message);
@@ -28,7 +36,6 @@ export const LoginUser = createAsyncThunk("user/LoginUser", async(user, thunkAPI
 
 export const RegisterUser = createAsyncThunk("user/RegisterUser", async(user, thunkAPI) => {
     try {
-        console.log("sampai register slice");
         const response = await axios.post(import.meta.env.VITE_REACT_APP_API_URL+'/users', {
             nik: user.nik,
             absenId: user.absenId,
@@ -65,8 +72,8 @@ export const RegisterUser = createAsyncThunk("user/RegisterUser", async(user, th
             nomorRekening: user.nomorRekening,
             jamOperasionalId: user.jamOperasionalId,
             groupId: user.groupId,
-            statusId: null,
-            quote: null,
+            statusId: '744cf642-ae53-487c-8dd4-24bb2b7bf068',
+            quote: 'kadal',
             password: user.password
         },{
             withCredentials: true, // Now this is was the missing piece in the client side 
@@ -98,7 +105,6 @@ export const LogOut = createAsyncThunk("user/LogOut", async() => {
     await axios.delete(import.meta.env.VITE_REACT_APP_API_URL+'/logout',{
         withCredentials: true, // Now this is was the missing piece in the client side 
     });
-    console.log("logout men")
 });
 
 export const authSlice = createSlice({

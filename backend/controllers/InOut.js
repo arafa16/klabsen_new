@@ -9,7 +9,7 @@ import Users from "../models/UserModel.js";
 export const getInOut = async(req, res) => {
     try {
         const response = await InOut.findAll({
-            attributes:['uuid','tanggalMasuk','tanggalPulang'],
+            attributes:['uuid','tanggalMulai','tanggalSelesai','isActive'],
             include:[{
                 model:Users,
                 attributes:['uuid','name','absenId','isActive'],
@@ -23,6 +23,9 @@ export const getInOut = async(req, res) => {
                 }
             },{
                 model:TipeAbsen,
+                attributes:['uuid','name']
+            },{
+                model:Pelanggaran,
                 attributes:['uuid','name']
             },{
                 model:StatusInout,
@@ -42,7 +45,7 @@ export const getInOutById = async(req, res) => {
             where:{
                 uuid:req.params.id
             },
-            attributes:['uuid','tanggalMasuk','tanggalPulang','isActive'],
+            attributes:['uuid','tanggalMulai','tanggalSelesai','isActive'],
             include:[{
                 model:Users,
                 attributes:['uuid','name','absenId'],
@@ -58,6 +61,51 @@ export const getInOutById = async(req, res) => {
                 model:TipeAbsen,
                 attributes:['uuid','name']
             },{
+                model:Pelanggaran,
+                attributes:['uuid','name']
+            },{
+                model:StatusInout,
+                attributes:['uuid','name']
+            }]
+        });
+        
+        return res.status(200).json(response);
+    } catch (error) {
+        return res.status(500).json({msg: error.message})
+    }
+}
+
+export const getInOutUserById = async(req, res) => {
+    try {
+        const user = await Users.findOne({
+            where:{
+                uuid:req.params.id
+            }
+        });
+
+        const response = await InOut.findAll({
+            where:{
+                userId:user.id
+            },
+            attributes:['uuid','tanggalMulai','tanggalSelesai','isActive'],
+            include:[{
+                model:Users,
+                attributes:['uuid','name','absenId'],
+                include:{
+                    model:Atasan,
+                    attributes:['uuid'],
+                    include:{
+                        model:Users,
+                        attributes:['uuid','name']
+                    }
+                }
+            },{
+                model:TipeAbsen,
+                attributes:['uuid','name']
+            },{
+                model:Pelanggaran,
+                attributes:['uuid','name']
+            },{
                 model:StatusInout,
                 attributes:['uuid','name']
             }]
@@ -70,7 +118,7 @@ export const getInOutById = async(req, res) => {
 }
 
 export const createInOut = async(req, res) => {
-    const {userId, tanggalMasuk, tanggalPulang, tipeAbsenId, pelanggaranId, statusInoutId} = req.body;
+    const {userId, tanggalMulai, tanggalSelesai, tipeAbsenId, pelanggaranId, statusInoutId} = req.body;
 
     const user = await Users.findOne({
         where:{
@@ -99,8 +147,8 @@ export const createInOut = async(req, res) => {
     try {
         await InOut.create({
             userId:user && user.id,
-            tanggalMasuk:tanggalMasuk,
-            tanggalPulang:tanggalPulang,
+            tanggalMulai:tanggalMulai,
+            tanggalSelesai:tanggalSelesai,
             tipeAbsenId:tipeAbsen && tipeAbsen.id,
             pelanggaranId:pelanggaran && pelanggaran.id,
             statusInoutId:statusInout && statusInout.id
@@ -113,7 +161,7 @@ export const createInOut = async(req, res) => {
 }
 
 export const updateInOut = async(req, res) => {
-    const {userId, tanggalMasuk, tanggalPulang, tipeAbsenId, pelanggaranId, statusInoutId} = req.body;
+    const {userId, tanggalMulai, tanggalSelesai, tipeAbsenId, pelanggaranId, statusInoutId} = req.body;
 
     const findInOut = await InOut.findOne({
         where:{
@@ -150,8 +198,8 @@ export const updateInOut = async(req, res) => {
     try {
         findInOut.update({
             userId:user && user.id,
-            tanggalMasuk:tanggalMasuk,
-            tanggalPulang:tanggalPulang,
+            tanggalMulai:tanggalMulai,
+            tanggalSelesai:tanggalSelesai,
             tipeAbsenId:tipeAbsen && tipeAbsen.id,
             pelanggaranId:pelanggaran && pelanggaran.id,
             statusInoutId:statusInout && statusInout.id

@@ -23,14 +23,14 @@ const InOut = db.define('in_out', {
             notEmpty: true
         }
     },
-    tanggalMasuk:{
+    tanggalMulai:{
         type: DataTypes.DATE,
         allowNull:false,
         validate:{
             notEmpty: true
         }
     },
-    tanggalPulang:{
+    tanggalSelesai:{
         type: DataTypes.DATE,
         allowNull:false,
         validate:{

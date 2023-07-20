@@ -8,6 +8,7 @@ import FileUpload from 'express-fileupload';
 //tabel
 import UserRoute from './routes/UserRoute.js';
 import StatusRoute from './routes/StatusRoute.js';
+import StatusInoutRoute from './routes/StatusInoutRoute.js';
 import PeriodeRoute from './routes/PeriodeRoute.js';
 import InOut from './routes/InOutRoute.js';
 import NotificationRoute from './routes/NotificationRoute.js';
@@ -73,6 +74,7 @@ app.use(express.json());
 app.use(FileUpload());
 app.use(UserRoute);
 app.use(StatusRoute);
+app.use(StatusInoutRoute);
 app.use(PeriodeRoute);
 app.use(NotificationRoute);
 app.use(KoreksiRoute);

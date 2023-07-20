@@ -1,21 +1,22 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LogOut, reset } from "../../stores/features/authSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
+import userNotFound from "../../assets/images/user.jpeg";
 import Lucide from "../../base-components/Lucide";
 import Breadcrumb from "../../base-components/Breadcrumb";
-// import { FormInput } from "../../base-components/Form";
 import { Menu, Popover, Dialog } from "../../base-components/Headless";
 import fakerData from "../../utils/faker";
 import _ from "lodash";
 import clsx from "clsx";
 
-function Main(props: { toggleMobileMenu: (event: React.MouseEvent) => void, name: string, group: string, logOut:void }) {
-  const {name, group} = props;
+function Main(props: { toggleMobileMenu: (event: React.MouseEvent) => void, name: string, url: string, group: string, logOut:void }) {
+  const {name, group, url} = props;
   const [searchResultModal, setSearchResultModal] = useState(false);
   const dispath = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const getLogout = () => {
     console.log("logout");
@@ -48,10 +49,9 @@ function Main(props: { toggleMobileMenu: (event: React.MouseEvent) => void, name
       >
         {/* BEGIN: Breadcrumb */}
         <Breadcrumb className="hidden -intro-x xl:flex">
-          <Breadcrumb.Link to="/">App</Breadcrumb.Link>
-          <Breadcrumb.Link to="/">Administrator</Breadcrumb.Link>
-          <Breadcrumb.Link to="/" active={true}>
-            Dashboard
+          <Breadcrumb >App</Breadcrumb>
+          <Breadcrumb.Link to='#' active={true}>
+            <div className="capitalize">{location.state ? location.state.name : name}</div>
           </Breadcrumb.Link>
         </Breadcrumb>
         {/* END: Breadcrumb */}
@@ -257,16 +257,16 @@ function Main(props: { toggleMobileMenu: (event: React.MouseEvent) => void, name
           <Menu.Button className="flex items-center h-full dropdown-toggle">
             <div className="w-10 h-10 image-fit">
               <img
-                alt="Rocketman - HTML Admin Template"
+                alt={userNotFound}
                 className="border-2 border-white rounded-full shadow-lg border-opacity-10"
-                src={fakerData[9].photos[0]}
+                src={url || userNotFound}
               />
             </div>
             <div className="hidden ml-3 md:block">
-              <div className="max-w-[7rem] truncate font-medium">
+              <div className="max-w-[7rem] truncate font-medium capitalize">
                 {name}
               </div>
-              <div className="text-xs text-slate-400">
+              <div className="text-xs text-slate-400 capitalize">
                 {group}
               </div>
             </div>

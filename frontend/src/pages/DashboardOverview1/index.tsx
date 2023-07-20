@@ -1,7 +1,4 @@
-import React, {useEffect} from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { getMe } from "../../stores/features/authSlice";
+
 
 import Lucide from "../../base-components/Lucide";
 import Tippy from "../../base-components/Tippy";
@@ -35,19 +32,7 @@ import safariUrl from "../../assets/images/browsers/safari.png";
 function Main() {
   const [generalReportFilter, setGeneralReportFilter] = useState<string>();
   const [salesReportFilter, setSalesReportFilter] = useState<string>();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { isError } = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    dispatch(getMe());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (isError) {
-      navigate("/login");
-    }
-  }, [isError, navigate]);
 
   const salesPerformance = () => {
     return [

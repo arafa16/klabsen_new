@@ -163,6 +163,10 @@ export const getUserById = async(req, res) => {
                     attributes:['uuid','name']
                 },
                 {
+                    model:Bank,
+                    attributes:['uuid','name']
+                },
+                {
                     model:GolonganDarah,
                     attributes:['uuid','name']
                 },
@@ -508,7 +512,7 @@ export const updateUser = async(req, res) => {
             statusPerkawinanId:statusPerkawinan && statusPerkawinan.id,
             jumlahAnak:jumlahAnak,
             namaIbu:namaIbu,
-            pendidikanId:pendidikan && pendidikanId,
+            pendidikanId:pendidikan && pendidikan.id,
             namaSekolah:namaSekolah,
             jurusanSekolah:jurusanSekolah,
             tahunLulus:tahunLulus,

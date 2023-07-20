@@ -18,6 +18,16 @@ const initialState: SideMenuState = {
   menu: [
     "START MENU",
     {
+      icon: "Trello",
+      pathname: "/profile",
+      title: "Profile",
+    },
+    {
+      icon: "Calendar",
+      pathname: "/absen",
+      title: "Absen",
+    },
+    {
       icon: "Home",
       title: "Dashboard",
       subMenu: [
@@ -96,11 +106,6 @@ const initialState: SideMenuState = {
       title: "File Manager",
     },
     "PAGES",
-    {
-      icon: "Trello",
-      pathname: "/profile",
-      title: "Profile",
-    },
     {
       icon: "ShoppingBag",
       pathname: "/pricing",

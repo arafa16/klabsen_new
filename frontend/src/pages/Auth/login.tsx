@@ -1,8 +1,10 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from 'react-router-dom';
 import {LoginUser, reset, getMe} from "../../stores/features/authSlice";
-import Toastify from "toastify-js";
+import Notification from "../../base-components/Notification";
+import { NotificationElement } from "../../base-components/Notification";
+import Lucide from "../../base-components/Lucide";
 
 //template
 import logoKopkarla from "../../assets/images/logo.png";
@@ -13,8 +15,8 @@ import { FormInput, FormCheck } from "../../base-components/Form";
 import LoadingIcon from "../../base-components/LoadingIcon";
 
 function Main() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,41 +26,53 @@ function Main() {
 
   useEffect(()=>{
     dispatch(getMe());
-    if(isSuccess){
-      navigate('/')
-    }
   },[dispatch]);
-
-  // const Notify = (text) => {
-  //   Toastify({
-  //     text: text,
-  //     className: "info",
-  //     style: {
-  //       background: "linear-gradient(to right, #00b09b, #96c93d)",
-  //     }
-  //   }).showToast();
-  // }
-
-
 
   useEffect(()=>{
       if(user || isSuccess){
-          navigate("/")
+        navigate("/profile")
       }
       dispatch(reset());
   },[user, isSuccess, dispatch, navigate]);
 
-
-  const Auth = (e) => {
+  const Auth = (e:eny) => {
       e.preventDefault();
       dispatch(LoginUser({email, password}));
+      messageNotif();
   }
+
+  // inisialisasi notif
+  const messageNotification = useRef<NotificationElement>();
+  const messageNotif = () => {
+    // Show notification
+    messageNotification.current?.showToast();
+  };
 
   return (
     <>
       <div className="container">
         <DarkModeSwitcher />
         <MainColorSwitcher />
+        <Notification
+          getRef={(el) => {
+            messageNotification.current = el;
+          }}
+          options={{
+            duration: 3000,
+          }}
+          className="flex flex-col sm:flex-row"
+        >
+          <Lucide 
+            icon={`${isError ? 'XCircle' : 'CheckCircle'}`} 
+            className={`${isError ? 'text-danger'  : 'text-success'}`}
+            />
+          <div className="ml-4 mr-4">
+            <div className="font-medium">Message</div>
+            <div className="mt-1 text-slate-500 capitalize">
+              {message ? message : 'login success'}
+            </div>
+          </div>
+        </Notification>
         <div className="flex items-center justify-center w-full min-h-screen p-5 md:p-20">
           <div className="w-96 intro-y">
             <img
@@ -93,6 +107,7 @@ function Main() {
                   <label
                     className="cursor-pointer select-none"
                     htmlFor="remember-me"
+                    onClick={messageNotif}
                   >
                     Remember me
                   </label>

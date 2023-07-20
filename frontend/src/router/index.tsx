@@ -3,6 +3,7 @@ import Menu from "../layouts/SideMenu";
 import DashboardOverview1 from "../pages/DashboardOverview1";
 import DashboardOverview2 from "../pages/DashboardOverview2";
 import Calendar from "../pages/Calendar";
+import Absen from "../pages/Absen";
 import Chat from "../pages/Chat";
 import Inbox from "../pages/Inbox";
 import EmailDetail from "../pages/EmailDetail";
@@ -60,6 +61,10 @@ function Router() {
       path: "/",
       element: <Menu />,
       children: [
+        {
+          path: "/absen",
+          element: <Absen />,
+        },
         {
           path: "/",
           element: <DashboardOverview1 />,
@@ -247,10 +252,12 @@ function Router() {
       ],
     },
     {
+      //digunakan
       path: "/login",
       element: <Login />,
     },
     {
+      //digunakan
       path: "/register",
       element: <Register />,
     },
