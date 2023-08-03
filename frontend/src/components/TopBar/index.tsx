@@ -25,6 +25,10 @@ function Main(props: { toggleMobileMenu: (event: React.MouseEvent) => void, name
     navigate("/login");
   }
 
+  const getProfile = () => {
+    navigate("/profile");
+  }
+
   // Show search result modal
   const showSearchResultModal = () => {
     setSearchResultModal(true);
@@ -272,17 +276,11 @@ function Main(props: { toggleMobileMenu: (event: React.MouseEvent) => void, name
             </div>
           </Menu.Button>
           <Menu.Items className="w-56 mt-px">
-            <Menu.Item>
+            <Menu.Item onClick={()=>getProfile()}>
               <Lucide icon="User" className="w-4 h-4 mr-2" /> Profile
             </Menu.Item>
             <Menu.Item>
-              <Lucide icon="Edit" className="w-4 h-4 mr-2" /> Add Account
-            </Menu.Item>
-            <Menu.Item>
               <Lucide icon="Lock" className="w-4 h-4 mr-2" /> Reset Password
-            </Menu.Item>
-            <Menu.Item>
-              <Lucide icon="HelpCircle" className="w-4 h-4 mr-2" /> Help
             </Menu.Item>
             <Menu.Divider />
             <Menu.Item onClick={()=>getLogout()}>
