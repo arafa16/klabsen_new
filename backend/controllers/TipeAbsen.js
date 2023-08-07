@@ -3,7 +3,7 @@ import TipeAbsen from "../models/TipeAbsenModal.js";
 export const getTipeAbsen = async(req, res) => {
     try {
         const response = await TipeAbsen.findAll({
-            attributes:['uuid','name']
+            attributes:['uuid','code','name','isActive']
         });
 
         return res.status(200).json(response);
@@ -18,7 +18,7 @@ export const getTipeAbsenById = async(req, res) => {
             where:{
                 uuid:req.params.id
             },
-            attributes:['uuid','name']
+            attributes:['uuid','code','name','isActive']
         });
 
         return res.status(200).json(response);
@@ -28,9 +28,12 @@ export const getTipeAbsenById = async(req, res) => {
 }
 
 export const createTipeAbsen = async(req, res) => {
+    const {code, name} = req.body;
+
     try {
         await TipeAbsen.create({
-            name:req.body.name
+            code:code,
+            name:name
         });
 
         return res.status(201).json({msg: "create tipe success"});
@@ -40,6 +43,8 @@ export const createTipeAbsen = async(req, res) => {
 }
 
 export const updateTipeAbsen = async(req, res) => {
+    const {code, name} = req.body;
+
     const findTipe = await TipeAbsen.findOne({
         where:{
             uuid:req.params.id
@@ -50,10 +55,11 @@ export const updateTipeAbsen = async(req, res) => {
 
     try {
         findTipe.update({
-            name:req.body.name
+            code:code,
+            name:name
         });
 
-        return res.status(201).json({msg: "create tipe success"});
+        return res.status(201).json({msg: "update tipe success"});
     } catch (error) {
         return res.status(500).json({msg: error.message});
     }

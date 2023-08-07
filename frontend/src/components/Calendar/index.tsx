@@ -53,7 +53,6 @@ function Main(props: TypeProps) {
       color: `${inOuts[i].pelanggaran.uuid === '951bcf0d-a100-434b-bbd5-7ce8df6c70bd'  ? 'red' : ''}`,
       className: 'cursor-pointer'
     })
-    console.log(datas);
   }
 
   const options: CalendarOptions = {

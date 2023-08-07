@@ -62,7 +62,7 @@ function Router() {
       element: <Menu />,
       children: [
         {
-          path: "/absen",
+          path: "/kalenderAbsen",
           element: <Absen />,
         },
         {

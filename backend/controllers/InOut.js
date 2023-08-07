@@ -160,6 +160,7 @@ export const createInOut = async(req, res) => {
     }
 }
 
+// update absen
 export const updateInOut = async(req, res) => {
     const {userId, tanggalMulai, tanggalSelesai, tipeAbsenId, pelanggaranId, statusInoutId} = req.body;
 
@@ -211,6 +212,7 @@ export const updateInOut = async(req, res) => {
     }
 }
 
+// delete absen
 export const deleteInOut = async(req, res) => {
     const findInOut = await InOut.findOne({
         where:{
@@ -227,4 +229,53 @@ export const deleteInOut = async(req, res) => {
     } catch (error) {
         return res.status(500).json({msg: error.message});
     }
+}
+
+//absen masuk
+
+export const absenMasuk = async(req, res) => {
+    const {userId, tanggalMulai, tanggalSelesai, tipeAbsenId, pelanggaranId, statusInoutId} = req.body;
+
+    const user = await Users.findOne({
+        where:{
+            uuid:userId
+        }
+    });
+
+    
+
+    const tipeAbsen = await TipeAbsen.findOne({
+        where:{
+            code:'0'
+        }
+    });
+
+    return res.json(tipeAbsen);
+
+    // const pelanggaran = await Pelanggaran.findOne({
+    //     where:{
+    //         uuid:pelanggaranId
+    //     }
+    // });
+
+    // const statusInout = await StatusInout.findOne({
+    //     where:{
+    //         uuid:statusInoutId
+    //     }
+    // })
+
+    // try {
+    //     await InOut.create({
+    //         userId:user && user.id,
+    //         tanggalMulai:tanggalMulai,
+    //         tanggalSelesai:tanggalSelesai,
+    //         tipeAbsenId:tipeAbsen && tipeAbsen.id,
+    //         pelanggaranId:pelanggaran && pelanggaran.id,
+    //         statusInoutId:statusInout && statusInout.id
+    //     });
+
+    //     return res.status(201).json({msg: "success"});
+    // } catch (error) {
+    //     return res.status(500).json({msg: error.message});
+    // }
 }
