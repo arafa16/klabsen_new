@@ -6,3 +6,5 @@ const db = new Sequelize('klabsen_db', 'root', '', {
 });
 
 export default db;
+
+//uji coba git ke server

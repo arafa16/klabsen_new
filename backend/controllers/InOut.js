@@ -242,8 +242,6 @@ export const absenMasuk = async(req, res) => {
         }
     });
 
-    
-
     const tipeAbsen = await TipeAbsen.findOne({
         where:{
             code:'0'
